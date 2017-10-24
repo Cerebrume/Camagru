@@ -12,7 +12,6 @@
 		<button id="snap">Snap Photo</button>
 		<canvas id="canvas" width="640" height="480"></canvas>
 	</div>
-
 	<script src="assets/app.js"></script>
 </body>
 </html>
