@@ -1,5 +1,12 @@
 <?php
 	require_once('config/setup.php');
+	class User {
+		public $login;
+
+		public validPass(){
+
+		}
+	}
 ?>
 
 <!DOCTYPE html>
