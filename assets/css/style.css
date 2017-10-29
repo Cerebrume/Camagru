@@ -1,0 +1,51 @@
+#video {
+    width: 307px;
+    height: 250px;
+    background: rgba(255,255,255,0.5);
+    border: 1px solid #ccc;
+}
+
+.grayscale {
+    -webkit-animation: grey_anim 7s infinite; /* Chrome, Safari, Opera */
+    animation: grey_anim 7s infinite;
+    filter: grayscale(1);
+    -moz-filter: grayscale(1);
+    -webkit-filter: grayscale(1);
+}
+
+.sepia {
+    filter: sepia(1);
+    -moz-filter: sepia(1);
+    -webkit-filter: sepia(1);
+}
+
+.blur {
+    filter: blur(2px);
+    -moz-filter: blur(2px);
+    -webkit-filter: blur(2px);
+}
+
+.hue_rotate {
+    filter: hue-rotate(100deg);
+    -moz-filter: hue-rotate(100deg);
+    -webkit-filter: hue-rotate(100deg);
+
+}
+
+.hue_rotate1 {
+    filter: hue-rotate(270deg);
+    -moz-filter: hue-rotate(270deg);
+    -webkit-filter: hue-rotate(270deg);
+}
+
+.hue_rotate2 {
+    filter: hue-rotate(150deg);
+    -moz-filter: hue-rotate(150deg);
+    -webkit-filter: hue-rotate(150deg);
+}
+
+.invert {
+    filter: invert(100%);
+    -moz-filter: invert(100%);
+    -webkit-filter: invert(100%);
+}
