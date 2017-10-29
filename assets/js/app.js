@@ -1,27 +1,31 @@
+var video = document.getElementById('video');
+var canvas = document.getElementById('canvas');
+var take_pic = document.getElementById('snap');
+var ctx = canvas.getContext('2d');
+var localMediaStream = null;
 
-/* (function () {
-    var video = document.getElementById('video');
-	
-	if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-		navigator.mediaDevices.getUserMedia({video: true}).then(function(stream){
-			video.src = window.URL.createObjectURL(stream);
-			video.play();
-		});
+function snapshot() {
+	if (localMediaStream) {
+	ctx.drawImage(video, 0, 0);
+	convertCanvasToImage(ctx);
 	}
-	else if(navigator.getUserMedia) { // Standard
-		navigator.getUserMedia({ video: true }, function(stream) {
-			video.src = stream;
-			video.play();
-		}, errBack);
-	} else if(navigator.webkitGetUserMedia) { // WebKit-prefixed
-		navigator.webkitGetUserMedia({ video: true }, function(stream){
-			video.src = window.webkitURL.createObjectURL(stream);
-			video.play();
-		}, errBack);
-	} else if(navigator.mozGetUserMedia) { // Mozilla-prefixed
-		navigator.mozGetUserMedia({ video: true }, function(stream){
-			video.src = window.URL.createObjectURL(stream);
-			video.play();
-		}, errBack);
-	}
- }()); */
+	var img = convertCanvasToImage(ctx);
+	document.appendChild
+}
+
+function convertCanvasToImage(canvas) {
+	var image = new Image();
+	image.src = canvas.toDataURL("image/png");
+	return image;
+}
+
+snap.addEventListener('click', snapshot, false);
+
+if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+	navigator.mediaDevices.getUserMedia({video: true})
+		.then(function(stream){
+		video.src = window.URL.createObjectURL(stream);
+		video.play();
+		localMediaStream = stream;
+	});
+}
