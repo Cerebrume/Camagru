@@ -1,15 +1,16 @@
 <?php
+
 abstract class Model{
 	protected $dbh;
 	protected $stmt;
 
 	public function __construct(){
-        require('../config/database.php');
+		include(dirname(__FILE__).'/../config/database.php');
         try {
-            $this->dbh = new PDO($DB_DSN, $DB_USER, $DB_PASSWORD);
+            $this->dbh = new PDO($DB_DSN. ";dbname=" .$DB_NAME, $DB_USER, $DB_PASSWORD);
             $this->dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (PDOException $e) {
-            echo 'Connection failed: ' . $e->getMessage();
+            echo '2Connection failed: ' . $e->getMessage();
         }
 	}
 

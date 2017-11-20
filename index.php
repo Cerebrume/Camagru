@@ -1,17 +1,18 @@
 <?php
-	require_once('config/setup.php');
+	require('config/setup.php');
+	require('config/conf.php');
 
-	require_once('Classes/Bootstrap.php');
-	require_once('Classes/Controller.php');
-	require_once('Classes/Model.php');
+	require('Classes/Bootstrap.php');
+	require('Classes/Controller.php');
+	require('Classes/Model.php');
 
-	require_once('Controllers/home.php');
-	require_once('Controllers/posts.php');
-	require_once('Controllers/users.php');
+	require('controllers/home.php');
+	require('controllers/posts.php');
+	require('controllers/users.php');
 
-	require_once('Models/home.php');
-	require_once('Models/post.php');
-	require_once('Models/user.php');
+	require('models/home.php');
+	require('models/post.php');
+	require('models/user.php');
 
 	$bootstrap = new Bootstrap($_GET);
 	$controller = $bootstrap->createController();

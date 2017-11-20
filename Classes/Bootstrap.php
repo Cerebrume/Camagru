@@ -19,12 +19,12 @@
         }
 
         public function createController(){
-            // Check Class
+             // Check Class
             if(class_exists($this->controller)){
                 $parents = class_parents($this->controller);
                 // Check Extend
                 if(in_array("Controller", $parents)){
-                    print($this->action);
+                    //print($this->action);
                     if(method_exists($this->controller, $this->action)){
                         return new $this->controller($this->action, $this->request);
                     } else {
@@ -43,5 +43,5 @@
                 return;
             }
         }
-    }
+    } 
 ?>

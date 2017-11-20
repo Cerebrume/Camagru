@@ -1,5 +1,5 @@
 <?php
-	require_once('database.php');
+	include('database.php');
 	try {
 		$db = new PDO($DB_DSN, $DB_USER, $DB_PASSWORD);
 		$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -20,7 +20,7 @@
 		);");
 		$db->exec($sql);
 	} catch (PDOException $e) {
-		echo 'Connection failed: ' . $e->getMessage();
+		echo '1Connection failed: ' . $e->getMessage();
 	}
 	$db = NULL;
 ?>
