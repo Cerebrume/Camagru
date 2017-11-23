@@ -1,4 +1,4 @@
-<form action="<?php //echo $_SERVER['PHP_SELF']; ?>" method="post">
+<form id="form-register" action="<?php //echo $_SERVER['PHP_SELF']; ?>" method="post">
 	<input type="text" name="login">
 	<input type="email" name="email">
 	<input type="password" name="password">

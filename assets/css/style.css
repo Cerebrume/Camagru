@@ -13,10 +13,15 @@ ul {
 }
 
 #video {
-    width: 307px;
-    height: 250px;
+    width: 64rem;
+    height: 48rem;
     background: rgba(255,255,255,0.5);
     border: 1px solid #ccc;
+}
+
+#canvas {
+    width: 64rem;
+    height: 48rem;
 }
 
 .grayscale {

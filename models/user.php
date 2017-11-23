@@ -48,6 +48,7 @@ class UserModel extends Model{
 					"login"	=> $result['login'],
 					"email"	=> $result['email']
 				);
+				echo 'Login success';
 				header('Location: '.ROOT_URL.'posts');
 			} else {
 				echo 'Incorrect Login';

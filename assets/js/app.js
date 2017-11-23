@@ -10,7 +10,7 @@ var img;
 
 function snapshot() {
 	if (localMediaStream) {
-		ctx.drawImage(video, 0, 0);
+		ctx.drawImage(video, 0, 0, 640, 480);
 		img = convertCanvasToImage(canvas);
 		console.log(img.src);
 	}

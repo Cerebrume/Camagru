@@ -34,8 +34,6 @@
 	</nav>
 	<?php require($view); ?>
 
-	<footer></footer>
-	<script src="assets/js/app.js"></script>
-	<script src="assets/js/filters.js"></script>
+	<footer><p>Created by dkazanov@student.unit.ua. UNIT Factory 2017</p></footer>
 </body>
 </html>
