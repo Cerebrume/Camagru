@@ -1,16 +1,20 @@
+
+"use strict";
+
 var video = document.getElementById('video');
 var canvas = document.getElementById('canvas');
 var take_pic = document.getElementById('snap');
 var ctx = canvas.getContext('2d');
 var localMediaStream = null;
+var img;
 
 function snapshot() {
 	if (localMediaStream) {
-	ctx.drawImage(video, 0, 0);
-	convertCanvasToImage(ctx);
+		ctx.drawImage(video, 0, 0);
+		img = convertCanvasToImage(canvas);
+		console.log(img.src);
 	}
-	var img = convertCanvasToImage(ctx);
-	document.appendChild
+
 }
 
 function convertCanvasToImage(canvas) {
@@ -24,7 +28,7 @@ snap.addEventListener('click', snapshot, false);
 if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
 	navigator.mediaDevices.getUserMedia({video: true})
 		.then(function(stream){
-		video.src = window.URL.createObjectURL(stream);
+		video.srcObject = stream;
 		video.play();
 		localMediaStream = stream;
 	});

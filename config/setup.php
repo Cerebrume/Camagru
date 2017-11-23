@@ -9,6 +9,7 @@
 			id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 			login VARCHAR(255) NOT NULL,
 			email VARCHAR(255),
+			password VARCHAR(128),
 			reg_date TIMESTAMP
 		);");
 		$db->exec($sql);

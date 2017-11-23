@@ -43,7 +43,7 @@ abstract class Model{
 	}
 
 	public function resultSet(){
-		$this->execute();
+		$this->stmt->execute();
 		return $this->stmt->fetchAll(PDO::FETCH_ASSOC);
 	}
 }

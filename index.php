@@ -1,6 +1,8 @@
 <?php
+
+	session_start();
 	require('config/setup.php');
-	require('config/conf.php');
+	require('conf.php');
 
 	require('Classes/Bootstrap.php');
 	require('Classes/Controller.php');

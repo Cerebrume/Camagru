@@ -1,8 +1,16 @@
-.container {
-	width: 1170px;
-	margin: 0 auto;
+html {
+	font-size: 10px;
 }
 
+body {
+	padding: 0;
+	margin: 0;
+}
+
+ul {
+	padding: 0;
+	margin: 0;
+}
 
 #video {
     width: 307px;
@@ -54,4 +62,43 @@
     filter: invert(100%);
     -moz-filter: invert(100%);
     -webkit-filter: invert(100%);
+}
+
+/*
+** HEADER
+*/
+
+.navbar {
+	width: 100%;
+	background: #0d496b;
+	padding: 1.5rem 0;
+}
+
+.header__links {
+	display: flex;
+	justify-content: space-between;
+	flex: 1;
+	list-style: none;
+	font-size: 1.6rem;
+}
+
+.header__links a {
+	color: #fff;
+	text-decoration: none;
+}
+
+.header__links a:hover {
+	color: #f0b103;
+}
+
+/*
+** FOOTER
+*/
+
+footer {
+	width: 100%;
+	padding: 1.5rem;
+	background: #0d496b;
+	position: fixed;
+	bottom: 0;
 }
