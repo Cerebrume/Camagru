@@ -16,6 +16,7 @@
 		$sql .= ("CREATE TABLE IF NOT EXISTS POSTS (
 			id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 			title VARCHAR(255) NOT NULL,
+			post_user VARCHAR(255),
 			img VARCHAR(255),
 			post_date TIMESTAMP
 		);");

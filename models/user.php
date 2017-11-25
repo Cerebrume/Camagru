@@ -33,6 +33,9 @@ class UserModel extends Model{
 	}
 
 	public function login() {
+		if (isset($_SESSION['is_logged_in'])) {
+			header("Location: ". ROOT_URL. "posts");
+		}
 		$post = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
 		if ($post['submit']) {

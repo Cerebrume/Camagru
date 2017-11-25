@@ -20,4 +20,9 @@ class Users extends Controller{
 		session_destroy();
 		header('Location: '.ROOT_URL);
 	}
+
+	protected function addPost() {
+		$viewmodel = new UserModel();
+		$this->returnView($viewmodel->addPost(), true);
+	}
 }
