@@ -75,9 +75,30 @@ ul {
 
 .navbar {
 	width: 100%;
-	background: #0d496b;
-	padding: 1.5rem 0;
+	background: #2699FB;
+	padding: 2.5rem 0;
 }
+
+.menu_icon, .profile_icon {
+	width: 1.4rem;
+	height: 1.2rem;
+}
+
+.camagru_logo {
+	width: 8.0rem;
+	height: 2.0rem;
+	transition: 10s;
+	transition-timing-function: ease-in-out;
+	-webkit-transition: 10s;
+	-webkit-transition-timing-function: ease-in-out;
+}
+
+.camagru_logo:hover .a,
+.menu_icon:hover .a,
+.profile_icon:hover .a{
+	fill: #00F6FF;
+}
+
 
 .header__links {
 	display: flex;
@@ -87,23 +108,70 @@ ul {
 	font-size: 1.6rem;
 }
 
-.header__links a {
+a {
 	color: #fff;
 	text-decoration: none;
 }
 
-.header__links a:hover {
-	color: #f0b103;
+a:hover {
+	color: #00F6FF;
+}
+
+
+.register_btn {
+	width: 8rem;
+	height: 5rem;
+	border: 1px solid #fff;
+	padding: 1rem 2rem;
+}
+
+.register_btn:hover {
+	border: 1px solid #00F6FF;
+}
+
+.profile {
+	position: relative;
+
+}
+
+.block {
+	display: inline-block;
+}
+
+.profile_icon {
+	position: relative;
+	cursor: pointer;
+	z-index: 2;
+}
+
+.profile__dropdown {
+	display: none;
+	color: #fff;
+	font-size: 1.3rem;
+	position: absolute;
+	list-style-type: none;
+	background-color: #2699FB;
+	top: 0.5rem;
+	padding: 5.1rem 1.5rem 2.5rem 3rem;
+	right: 4rem;
+	text-align: right;
+	z-index: 1;
+}
+
+.register {
+	font-size: 1.3rem;
+}
+
+.dropdown__item {
+	margin-bottom: 4rem;
+}
+
+.profile:hover .profile__dropdown {
+	display: block;
+
 }
 
 /*
 ** FOOTER
 */
 
-footer {
-	width: 100%;
-	padding: 1.5rem;
-	background: #0d496b;
-	position: fixed;
-	bottom: 0;
-}

@@ -11,9 +11,8 @@ var img;
 function sendPic(img) {
 	var http = new XMLHttpRequest();
 
-	http.open('POST', 'http://localhost/projects/Camagru/posts/add', true);
+	http.open('POST', '', true);
 
-	
 	http.onreadystatechange = function () {
 		if (this.readyState != 4) return;
 
@@ -25,7 +24,7 @@ function sendPic(img) {
 		}
 	}
 	http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-	http.send("img=" + img.src);
+	http.send("submit_img=true" + "&img=" + encodeURIComponent(img));
 }
 
 function snapshot() {
@@ -33,15 +32,15 @@ function snapshot() {
 		ctx.drawImage(video, 0, 0, 640, 480);
 		img = convertCanvasToImage(canvas);
 		sendPic(img);
-		console.log(img.src);
+		//alert(img.src);
 
 	}
 
 }
 
 function convertCanvasToImage(canvas) {
-	var image = new Image();
-	image.src = canvas.toDataURL("image/png");
+	var image;
+	image = canvas.toDataURL("image/png");
 	return image;
 }
 

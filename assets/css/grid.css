@@ -41,6 +41,10 @@
 	width: 100%;
 }
 
+.row--space_between {
+	justify-content: space-between;
+}
+
 .row--gatters [class*='col-'] {
 	padding-right: 0.3rem;
 }
