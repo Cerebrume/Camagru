@@ -38,13 +38,18 @@ abstract class Model{
 		$this->stmt->bindValue($param, $value, $type);
 	}
 
-	public function execute(){
+	public function execute() {
 		$this->stmt->execute();
 	}
 
-	public function resultSet(){
+	public function resultSet() {
 		$this->stmt->execute();
 		return $this->stmt->fetchAll(PDO::FETCH_ASSOC);
+	}
+
+	public function single() {
+		$this->stmt->execute();
+		return $this->stmt->fetch(PDO::FETCH_ASSOC);
 	}
 }
 ?>

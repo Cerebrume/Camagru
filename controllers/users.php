@@ -6,6 +6,9 @@ class Users extends Controller{
 
 	protected function register() {
 		$viewmodel = new UserModel();
+		if (isset($_SESSION['is_logged_in'])) {
+			header('Location: '.ROOT_URL);
+		}
 		$this->returnView($viewmodel->register(), true);
 	}
 
@@ -22,6 +25,9 @@ class Users extends Controller{
 	}
 
 	protected function addPost() {
+		if (!isset($_SESSION['is_logged_in'])) {
+			header('Location: '.ROOT_URL);
+		}
 		$viewmodel = new UserModel();
 		$this->returnView($viewmodel->addPost(), true);
 	}

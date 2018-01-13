@@ -7,7 +7,10 @@ class PostModel extends Model{
 	}
 
 	public function add() {
-		//if ($_SESSION['is_logged_in'] != True) return;
+		if (!$_SESSION['is_logged_in']){
+			header("Location: ". ROOT_URL);
+			return;
+		}
 		$post = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 		//print_r($_SESSION);
 		

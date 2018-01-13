@@ -1,20 +1,27 @@
 <?php
 class UserModel extends Model{
 	public function register() {
+
+		if (isset($_SESSION['is_logged_in'])) {
+			header("Location: ". ROOT_URL. "posts");
+		}
+		
 		$post = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 		$passwd = password_hash($post['password'], PASSWORD_BCRYPT);
 		if ($post['submit']) {
-			$this->query('SELECT * FROM users WHERE login=:login');
+			
+			$this->query('SELECT login FROM users WHERE login=:login');
 			$this->bind(":login", $post['login']);
+			
 			if ($this->resultSet()) {
-				echo "ERROR LOGIN IS EXISTS";
-				return;
+				Messages::setMessage("User with this login already exist", "error");
+				return ;
 			}
-			$this->query('SELECT * FROM users WHERE email=:email');
+			$this->query('SELECT email FROM users WHERE email=:email');
 			$this->bind(":email", $post['email']);
 			if ($this->resultSet()) {
-				echo "ERROR EMAIL IS EXISTS";
-				return;
+				Messages::setMessage("User with this email already exist", "error");
+				return ;
 			}
 
 			$this->query('INSERT INTO users (login, email, password) VALUES(:login, :email, :password)');
@@ -23,8 +30,9 @@ class UserModel extends Model{
 			$this->bind(":password", $passwd);
 			
 			$this->execute();
-			
+			print $this->dbh->lastInsertId();
 			if ($this->dbh->lastInsertId()) {
+				echo "HERE!!!!!!!!!!!!!";
 				header('Location: '.ROOT_URL.'users/login');
 			}
 		}
@@ -44,7 +52,7 @@ class UserModel extends Model{
 			$this->execute();
 			$result = $this->stmt->fetch(PDO::FETCH_ASSOC);
 			$isPasswordCorrect = password_verify($_POST['password'], $result['password']);
-			if ($isPasswordCorrect) {
+			if ($isPasswordCorrect && $result) {
 				$_SESSION['is_logged_in'] = true;
 				$_SESSION['user_data'] = array(
 					"id"	=> $result['id'],
@@ -54,7 +62,7 @@ class UserModel extends Model{
 				echo 'Login success';
 				header('Location: '.ROOT_URL.'posts');
 			} else {
-				echo 'Incorrect Login';
+				Messages::setMessage("No such user found", "error");
 			}
 		}
 		return;

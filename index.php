@@ -7,7 +7,7 @@
 	require('Classes/Bootstrap.php');
 	require('Classes/Controller.php');
 	require('Classes/Model.php');
-
+	require('Classes/Messages.php');
 	require('controllers/home.php');
 	require('controllers/posts.php');
 	require('controllers/users.php');

@@ -54,3 +54,4 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
 		localMediaStream = stream;
 	});
 }
+
