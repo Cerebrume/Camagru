@@ -7,6 +7,7 @@ var take_pic = document.getElementById('snap');
 var ctx = canvas.getContext('2d');
 var localMediaStream = null;
 var img;
+var desc = document.getElementById('desc');
 
 function sendPic(img) {
 	var http = new XMLHttpRequest();
@@ -24,7 +25,7 @@ function sendPic(img) {
 		}
 	}
 	http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-	http.send("submit_img=true" + "&img=" + encodeURIComponent(img));
+	http.send("submit_img=true" + "&desc=" + desc + "&img=" + encodeURIComponent(img));
 }
 
 function snapshot() {
@@ -54,4 +55,6 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
 		localMediaStream = stream;
 	});
 }
+
+
 

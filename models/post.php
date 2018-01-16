@@ -7,25 +7,34 @@ class PostModel extends Model{
 	}
 
 	public function add() {
-		if (!$_SESSION['is_logged_in']){
+
+		$post = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+		
+		if ($_SESSION['is_logged_in']) {
+			
+			if (isset($post['submit_img'])) {
+				print_r($_SESSION);
+				
+				try {
+					$this->query('INSERT INTO posts (post_user, post_desc, img) VALUES(:user, :title, :img)');
+					$this->bind(":title", $post['desc']);
+					$this->bind(":user", $_SESSION['user_data']['login']);
+					$this->bind(":img", $post['img'], PDO::PARAM_LOB);
+					$this->single();
+				} catch (PDOException $e) {
+					echo 'Connection failed: ' . $e->getMessage();
+				}
+				
+				
+				if ($this->dbh->lastInsertId()) {
+					header('Location: '.ROOT_URL.'posts/');
+				}
+			}
+			
+		}
+		else {
 			header("Location: ". ROOT_URL);
 			return;
-		}
-		$post = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-		//print_r($_SESSION);
-		
-		if (isset($post['submit_img']) && $_SESSION['is_logged_in']) {
-			print_r($_SESSION);
-			$this->query('INSERT INTO posts (title, post_user, img) VALUES(:title, :user, :img)');
-			$this->bind(":title", $_SESSION['user_data']['id']);
-			$this->bind(":user", $_SESSION['user_data']['login']);
-			$this->bind(":img", $post['img'], PDO::PARAM_LOB);
-			
-			$this->execute();
-			
-			if ($this->dbh->lastInsertId()) {
-				header('Location: '.ROOT_URL.'posts/');
-			}
 		}
 		
 		

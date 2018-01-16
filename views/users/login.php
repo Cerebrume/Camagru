@@ -9,6 +9,7 @@
 				<input type="password" name="password"  id="passwd" placeholder="Password">
 				<input type="hidden" name="submit" value="true">
 				<input id="submit" class="login" type="submit" value="Login">
+				<span class="form-login__or-register">or <a href="<?php echo ROOT_PATH. "users/register" ?>">Register</a></span>
 			</form>
 		</div>
 	</div>

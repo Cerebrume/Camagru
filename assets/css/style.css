@@ -1,13 +1,25 @@
 html {
 	font-size: 10px;
+	height: 100%;
+	width: 100%;
 }
 
 body {
 	padding: 0;
 	margin: 0;
 	height: 100%;
-	min-height: 100%;
+	width: 100%;
 	position: relative;
+}
+
+.content {
+	position: relative;
+	min-height: 100%;
+	overflow: hidden;
+}
+
+.empty {
+	height: 9rem;
 }
 
 textarea, input { outline: none; }
@@ -113,6 +125,11 @@ h2 {
 	height: 1.2rem;
 }
 
+.profile__username {
+	color: #fff;
+	overflow: hidden;
+}
+
 .camagru_logo {
 	width: 8.0rem;
 	height: 2.0rem;
@@ -210,9 +227,8 @@ footer {
 	padding: 2.5rem 0;
 	color: #fff;
 	font-size: 1.2rem;
-	position: absolute;
-	bottom: -15rem;
-
+	box-sizing: border-box;
+	height: 9rem;
 }
 
 
@@ -264,6 +280,20 @@ footer {
 	line-height: 1;
 }
 
+.form-login__or-register a,
+.form-login__or-register {
+	color: rgb(219, 219, 219);
+	font-size: 1.4rem;
+}
+
+.form-login__or-register a{
+	text-decoration: underline;
+	color: #8a8a8a;
+}
+
+.form-login__or-register a:hover {
+	color: #00F6FF;
+}
 /*
 ** Register page
 */
