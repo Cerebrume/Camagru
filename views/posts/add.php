@@ -1,23 +1,18 @@
 
 <div class="content">
-
 	<div class="wrapper">
 		<div class="row">
 			<div class="col-6">
 				<div class="camera-canvas">
 					<video id="video" width="640" height="480" autoplay></video>
-					
 					<canvas id="canvas" width="640" height="480"></canvas>
 				</div>
 			</div>
-			<div class="col-6">
-				<form action="" method="post">
-					<input type="file" name="file" id="file">
+			<div class="post-add col-6">
+					<input class="post-add__file" type="file" name="file" id="file" accept=".png, .jpg, .jpeg">
 					<label for="desc">Comment:</label>
-					<textarea style="resize:none;" name="desc" id="desc" cols="20" rows="3" maxlength="70"></textarea>
-					<button id="snap">Snap Photo</button>
-				</form>
-				
+					<textarea class="post-add__comment" style="resize:none;" name="desc" id="desc" cols="20" rows="3" maxlength="70"></textarea>
+					<button class="post-add__snap" id="snap">Snap Photo</button>
 			</div>
 			
 			

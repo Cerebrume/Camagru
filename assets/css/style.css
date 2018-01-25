@@ -1,3 +1,7 @@
+* {
+	box-sizing: border-box;
+}
+
 html {
 	font-size: 10px;
 	height: 100%;
@@ -383,4 +387,40 @@ input[type='password']#passwd {
 .alert-danger {
 	background-color: #cc1212;
 	color: #fff;
+}
+
+/*
+** POSTS GALERY
+*/
+
+.share {
+	display: flex;
+	flex-basis: 40%;
+	background-color: #7DC1FA;
+	flex-direction: column;
+	justify-items: flex-start;
+	align-items: flex-start;
+	padding: 3rem;
+	color: rgb(255, 255, 255);
+}
+
+.share_img {
+	width: 40rem;
+}
+
+.share_user {
+	font-size: 1.6rem;
+}
+
+.share_user-desc {
+	font-size: 1.2rem;
+	color: rgb(14, 14, 14);
+}
+
+.share_desc {
+	font-size: 1.2rem;
+}
+
+.share_date {
+	font-size: 1rem;
 }

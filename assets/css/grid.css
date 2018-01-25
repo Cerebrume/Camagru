@@ -37,8 +37,8 @@
 	justify-content: space-between;
 	-webkit-box-orient: horizontal;
 	-webkit-box-direction: normal;
-	-ms-flex-flow: row nowrap;
-	flex-flow: row nowrap;
+	-ms-flex-flow: row wrap;
+	flex-flow: row wrap;
 	width: 100%;
 }
 
@@ -46,12 +46,12 @@
 	justify-content: space-between;
 }
 
-.row--gatters [class*='col-'] {
-	padding-right: 0.3rem;
+.row--space_around {
+	justify-content: space-around;
 }
 
-.row--gatters [class*='col-']:last-of-type {
-	padding-right: 0;
+.row--gatters [class*='col-'] {
+	padding-right: 3rem;
 }
 
 [class*="col-"] {
@@ -128,8 +128,8 @@
 
 .col-12 {
 	-webkit-box-flex: 0;
-	-ms-flex: 0 0 75%;
-	flex: 0 0 75%;
+	-ms-flex: 1 0 75%;
+	flex: 1 0 75%;
 }
 
 .col-13 {

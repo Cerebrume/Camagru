@@ -26,6 +26,7 @@ function sendPic(img) {
 	}
 	http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	http.send("submit_img=true" + "&desc=" + desc + "&img=" + encodeURIComponent(img));
+	alert("submit_img=true" + "&desc=" + desc + "&img=" + encodeURIComponent(img));
 }
 
 function snapshot() {
