@@ -45,15 +45,12 @@ ul {
 }
 
 #video {
-    width: 64rem;
-    height: 48rem;
     background: rgba(255,255,255,0.5);
     border: 1px solid #ccc;
 }
 
 #canvas {
-    width: 64rem;
-    height: 48rem;
+    display: none;
 }
 
 .grayscale {
@@ -365,6 +362,64 @@ input[type='password']#passwd {
 	margin-bottom: 3rem;
 }
 
+
+
+/*
+** ADD POST PREVIEW
+*/
+
+.preview-bg {
+	display: none;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgb(14, 14, 14, 0.6);
+}
+
+.preview-bg__container {
+	width: 500px;
+	margin: 50px auto;
+	background-color: #fff;
+	display: flex;
+	flex: 1 1 1;
+	flex-wrap: wrap;
+	text-align: left;
+	padding: 0 30px;
+}
+
+.preview-bg__comment {
+	width: 100%;
+}
+
+.preview-bg__btn-send {
+	padding: 10px 25px;
+	background-color: #26ff3f;
+	border: 0;
+	box-shadow: 5px 5px 5px black;
+	cursor: pointer;
+}
+
+.preview-bg__btn-close {
+	padding: 15px 25px;
+	background-color: #fd123a;
+	border: 0;
+	box-shadow: 5px 5px 10px black;
+	cursor: pointer;
+
+}
+
+
+@-webkit-keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+@keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity:1 ;}
+}
 
 /*
 ** Messages
