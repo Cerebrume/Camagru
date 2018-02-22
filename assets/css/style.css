@@ -45,12 +45,13 @@ ul {
 }
 
 #video {
-    background: rgba(255,255,255,0.5);
-    border: 1px solid #ccc;
+	display: none;
 }
 
 #canvas {
-    display: none;
+	display: block;
+	background: rgba(255,255,255,0.5);
+    border: 1px solid #ccc;
 }
 
 .grayscale {
@@ -383,10 +384,10 @@ input[type='password']#passwd {
 	margin: 50px auto;
 	background-color: #fff;
 	display: flex;
-	flex: 1 1 1;
+	flex: 1 1 0;
 	flex-wrap: wrap;
 	text-align: left;
-	padding: 0 30px;
+	padding: 25px 30px;
 }
 
 .preview-bg__comment {
@@ -395,19 +396,25 @@ input[type='password']#passwd {
 
 .preview-bg__btn-send {
 	padding: 10px 25px;
-	background-color: #26ff3f;
+	background-color: #89ff96;
 	border: 0;
-	box-shadow: 5px 5px 5px black;
+	box-shadow: 0px 0px 5px black;
 	cursor: pointer;
 }
 
 .preview-bg__btn-close {
 	padding: 15px 25px;
-	background-color: #fd123a;
+	background-color: #ff3c4c;
 	border: 0;
-	box-shadow: 5px 5px 10px black;
+	box-shadow: 0px 0px 5px black;
 	cursor: pointer;
 
+}
+
+
+.camera-images img {
+	width: 200px;
+	height: 200px;
 }
 
 
