@@ -7,7 +7,7 @@ var take_pic = document.getElementById('snap');
 var ctx = canvas.getContext('2d');
 var localMediaStream = null;
 var img;
-var desc = document.getElementById('desc');
+var desc = document.getElementById('desc').value;
 var comment = document.getElementById('preview-bg__comment');
 
 var preview = document.getElementById('preview-bg');
@@ -39,24 +39,32 @@ function handleMouseDown(e){
 	canMouseY=parseInt(e.clientY-offsetY);
 	// clear the drag flag
 	isDragging=false;
+
   }
 
   function handleMouseOut(e){
-	canMouseX=parseInt(e.clientX-offsetX);
-	canMouseY=parseInt(e.clientY-offsetY);
+	if (isDragging) {
+		canMouseX=parseInt(e.clientX-offsetX);
+		canMouseY=parseInt(e.clientY-offsetY);
+	}
+	
 	// user has left the canvas, so clear the drag flag
 	isDragging=false;
   }
 
   function handleMouseMove(e){
-	canMouseX=parseInt(e.clientX-offsetX);
-	canMouseY=parseInt(e.clientY-offsetY);
-	// if the drag flag is set, clear the canvas and draw the image
-	if(isDragging){
-		
-		ctx.drawImage(currentPic,canMouseX-128/2,canMouseY-120/2,150,150);
+	  
+	if (isDragging) {
+		canMouseX=parseInt(e.clientX-offsetX);
+		canMouseY=parseInt(e.clientY-offsetY);
+		ctx.drawImage(currentPic, canMouseX - 150/2,canMouseY - 150/2, 150,150);
 	}
+	
+	// if the drag flag is set, clear the canvas and draw the image
+
   }
+
+  document.getElementById('dragble').innerText = isDragging;
 
 canvas.addEventListener('mousedown', handleMouseDown, false);
 canvas.addEventListener('mouseup', handleMouseUp, false);
@@ -89,6 +97,13 @@ function create_preview (img_src) {
 	btn_send.className = 'preview-bg__btn-send';
 	var textElem = document.createTextNode('Send');
 	btn_send.appendChild(textElem);
+	btn_send.addEventListener('click', function() {
+		sendPic(img_src);
+		preview.style.display = 'none';
+		while (preview__container.firstChild) {
+			preview__container.removeChild(preview__container.firstChild);
+		}
+	});
 	var btn_close = document.createElement('button');
 	btn_close.className = 'preview-bg__btn-close';
 	var textElem1 = document.createTextNode('Close');
@@ -139,10 +154,8 @@ for (let i = 0; i < faces.length; i++) {
 function snapshot() {
 	if (localMediaStream) {
 		ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-		ctx.drawImage(currentPic, canMouseX - 128/2, canMouseY - 128/2, 150, 150);
+		ctx.drawImage(currentPic, canMouseX - 150/2, canMouseY - 150/2, 150, 150);
 		img = convertCanvasToImage(canvas);
-		
-		//sendPic(img);
 		create_preview(img);
 
 	}
@@ -172,7 +185,7 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
 function timerCallback() {
     if (video.paused || video.ended) {
       return;
-    }
+	}
     computeFrame();
     setTimeout(function() {
         timerCallback();
@@ -181,7 +194,8 @@ function timerCallback() {
 
 function computeFrame() {
 	ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+	
 	if (currentPic) {
-		ctx.drawImage(currentPic, canMouseX -128/2, canMouseY - 128/2, 150, 150);
+		ctx.drawImage(currentPic, canMouseX - 150/2,canMouseY - 150/2, 150, 150);
 	}
 }

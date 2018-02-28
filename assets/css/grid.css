@@ -51,7 +51,8 @@
 }
 
 .row--gatters [class*='col-'] {
-	padding-right: 3rem;
+	padding-right: 1rem;
+	padding-left: 1rem;
 }
 
 [class*="col-"] {

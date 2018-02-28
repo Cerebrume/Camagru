@@ -12,9 +12,7 @@ class PostModel extends Model{
 		
 		if ($_SESSION['is_logged_in']) {
 			
-			if (isset($post['submit_img'])) {
-				print_r($_SESSION);
-				
+			if (isset($post['submit_img'])) {				
 				try {
 					$this->query('INSERT INTO posts (post_user, post_desc, img) VALUES(:user, :title, :img)');
 					$this->bind(":title", $post['desc']);
@@ -40,4 +38,5 @@ class PostModel extends Model{
 		
 		return ;
 	}
+
 }

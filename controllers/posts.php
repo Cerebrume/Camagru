@@ -9,4 +9,5 @@
 			$vievmodel = new PostModel();
 			$this->returnView($vievmodel->add(), true);
 		}
+
 	}
