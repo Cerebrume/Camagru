@@ -64,8 +64,6 @@ function handleMouseDown(e){
 
   }
 
-  document.getElementById('dragble').innerText = isDragging;
-
 canvas.addEventListener('mousedown', handleMouseDown, false);
 canvas.addEventListener('mouseup', handleMouseUp, false);
 canvas.addEventListener('mousemove', handleMouseMove, false);
@@ -129,7 +127,7 @@ function sendPic(img) {
 		if (this.readyState != 4) return;
 
 		if (this.status == 200) {
-			console.log("THIS: " + this.responseText);
+			//console.log("THIS: " + this.responseText);
 		}
 		else {
 			console.log( "Status: " + http.status + ': ' + http.statusText );

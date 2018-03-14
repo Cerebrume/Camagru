@@ -1,7 +1,15 @@
 <?php
 class PostModel extends Model{
 	public function Index(){
-		$this->query('SELECT * FROM posts ORDER BY post_date DESC');
+		$page = isset($_GET['id']) ? (int)$_GET['id'] : 0;
+		$per_page = 5;
+		$_GET['id'] = htmlentities($_GET['id']);
+		if(isset($_GET['id']) && is_numeric($_GET['id'])) {
+			$page = $_GET['id'];
+		}
+		$page = $page * $per_page;
+		$offset = $page + $per_page;
+		$this->query("SELECT * FROM posts ORDER BY post_date DESC LIMIT $page,$offset");
 		$rows = $this->resultSet();
 		return $rows;
 	}
@@ -39,4 +47,62 @@ class PostModel extends Model{
 		return ;
 	}
 
+	public function comment() {
+		if ($_SESSION['is_logged_in'] && isset($_POST['submit_comment'])) {
+			$post = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+			try {
+				$this->query('INSERT INTO comments (comment_user, comment_desc, comment_post_id) VALUES(:user, :post_desc, :id)');
+				$this->bind(":user", $_SESSION['user_data']['login']);
+				$this->bind(":post_desc", $post['comment_desc']);
+				$this->bind(":id", $post['comment_post_id']);
+				$this->execute();
+			} catch (PDOException $e) {
+				echo 'Connection failed: ' . $e->getMessage();
+			}
+		}
+		return;
+	}
+
+	public function getcomments() {
+		if ($_SESSION['is_logged_in']) {
+			try {
+				$this->query('SELECT * FROM comments ORDER BY comment_date ASC');
+				$rows = $this->resultSet();
+				return json_encode($rows);
+			} catch (PDOException $e) {
+				echo 'Connection failed: ' . $e->getMessage();
+			}
+		}
+		
+	}
+
+	public function like() {
+		if ($_SESSION['is_logged_in'] && isset($_POST['submit_like'])) {
+			$post = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+			try {
+				$this->query('INSERT INTO likes (like_user, like_post_id) SELECT * FROM (SELECT :user, :post_id) AS tmp WHERE NOT EXISTS (SELECT like_user, like_post_id FROM likes WHERE like_user = :user and like_post_id = :post_id) LIMIT 1');
+				$this->bind(":user", $_SESSION['user_data']['login']);
+				$this->bind(":post_id", $post['post_id']);
+				/* $this->bind(":like_user", $_SESSION['user_data']['login']); */
+
+				$this->execute();
+			} catch (PDOException $e) {
+				echo 'Connection failed: ' . $e->getMessage();
+			}
+			return "liked";
+		}
+	}
+
+	public function getLikes() {
+		if ($_SESSION['is_logged_in']) {
+			try {
+				$this->query('SELECT * FROM likes;');
+				$rows = $this->resultSet();
+				return json_encode($rows);
+			} catch (PDOException $e) {
+				echo 'Connection failed: ' . $e->getMessage();
+			}
+		}
+		
+	}
 }

@@ -487,3 +487,16 @@ input[type='password']#passwd {
 .share_date {
 	font-size: 1rem;
 }
+.share_like svg{
+	width: 24px;
+	height: 24px;
+	cursor: pointer;
+}
+
+.share_like svg.liked path{
+	fill:#ff0f73;
+}
+
+.share_like svg:hover path{
+	fill:#ff0f73;
+}
