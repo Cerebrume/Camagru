@@ -1,6 +1,6 @@
 <div class="wrapper">
 	<div class="row">
-		<div class="img col-6"><img class="side-img" src="<?php echo ROOT_PATH; ?>assets/img/register-img.jpg" alt=""></div>
+		<div class="img col-6"><img class="side-img" src="<?php echo ROOT_URL; ?>assets/img/register-img.jpg" alt=""></div>
 		<div class="main_text col-6 col--center">
 			<h2>Fill the fields for registration</h2>
 			<?php Messages::displayMessage(); ?>

@@ -5,7 +5,7 @@ function getComments() {
 
 	var http = new XMLHttpRequest();
 	var str = null;
-	var url = "http://localhost/projects/Camagru/posts/getcomments";
+	var url = "http://localhost/Camagru/posts/getcomments";
 	http.open('POST', url, true);
 
 	http.onreadystatechange = function () {
@@ -55,14 +55,16 @@ function getLikes() {
 	var http = new XMLHttpRequest();
 	var str = null;
 	var number_likes = 0;
-	var url = "http://localhost/projects/Camagru/posts/getLikes";
+	var url = "http://localhost/Camagru/posts/getLikes";
 	http.open('POST', url, true);
 
 	http.onreadystatechange = function () {
 		if (this.readyState != 4) return;
 
+		console.log(fetch('http://localhost/Camagru/posts/getLikes'));		
 		if (this.status == 200) {
 			
+			alert(this.responseText);
 			str = JSON.parse(this.responseText);
 			likes = str;
 			if (likes) {

@@ -331,13 +331,13 @@ p.arror_text {
 }
 
 #login {
-	background-image: url(/projects/Camagru/assets/img/login-icon.png);
+	background-image: url(/Camagru/assets/img/login-icon.png);
 }
 #email {
-	background-image: url(/projects/Camagru/assets/img/mail-icon.png);
+	background-image: url(/Camagru/assets/img/mail-icon.png);
 }
 #passwd {
-	background-image: url(/projects/Camagru/assets/img/lock-icon.png);
+	background-image: url(/Camagru/assets/img/lock-icon.png);
 }
 
 #login,

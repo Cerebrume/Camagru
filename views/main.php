@@ -5,8 +5,8 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>Camagru by dkazanov</title>
-	<link rel="stylesheet" href="<?php echo ROOT_PATH; ?>assets/css/style.css">
-	<link rel="stylesheet" href="<?php echo ROOT_PATH; ?>assets/css/grid.css">
+	<link rel="stylesheet" href="<?php echo ROOT_URL; ?>assets/css/style.css">
+	<link rel="stylesheet" href="<?php echo ROOT_URL; ?>assets/css/grid.css">
 </head>
 <body>
 	<nav class="navbar">

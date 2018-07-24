@@ -7,10 +7,10 @@
 					<video id="video" width="480" height="360" autoplay></video>
 					<canvas id="canvas" width="480" height="360"></canvas>
 					<div class="camera-images">
-						<img class="face-preset" src="<?php echo ROOT_PATH; ?>assets/img/preset2-img.png" alt="" srcset="">
-						<img class="face-preset" src="<?php echo ROOT_PATH; ?>assets/img/preset3-img.png" alt="" srcset="">
-						<img class="face-preset" src="<?php echo ROOT_PATH; ?>assets/img/preset4-img.png" alt="" srcset="">
-						<img class="face-preset" src="<?php echo ROOT_PATH; ?>assets/img/preset5-img.png" alt="" srcset="">
+						<img class="face-preset" src="<?php echo ROOT_URL; ?>assets/img/preset2-img.png" alt="" srcset="">
+						<img class="face-preset" src="<?php echo ROOT_URL; ?>assets/img/preset3-img.png" alt="" srcset="">
+						<img class="face-preset" src="<?php echo ROOT_URL; ?>assets/img/preset4-img.png" alt="" srcset="">
+						<img class="face-preset" src="<?php echo ROOT_URL; ?>assets/img/preset5-img.png" alt="" srcset="">
 					</div>
 				</div>
 			</div>

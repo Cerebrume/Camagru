@@ -18,7 +18,7 @@ function sendComment(e) {
 	if (comment.length <= 0) return;
 	var http = new XMLHttpRequest();
 
-	var url = "http://localhost/projects/Camagru/posts/comment";
+	var url = "http://localhost/Camagru/posts/comment";
 	http.open('POST', url, true);
 
 	http.onreadystatechange = function () {
@@ -74,7 +74,7 @@ function like() {
 	let liked = document.querySelector('.likes_count[post-id="'+ post_id + '"]');
 	liked.innerHTML = parseInt(liked.innerHTML) + 1;
 	this.nextSibling.innerText = likes_count++;
-	var url = "http://localhost/projects/Camagru/posts/like";
+	var url = "http://localhost/Camagru/posts/like";
 	http.open('POST', url, true);
 
 	http.onreadystatechange = function () {
