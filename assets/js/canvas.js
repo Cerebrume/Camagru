@@ -18,24 +18,26 @@ function handleMouseDown(e){
 	var mouseX = parseInt(e.clientX - offsetX);
 	var mouseY = parseInt(e.clientY - offsetY);
     // set the drag flag
-    console.log(mouseX, mouseY);
-	if (mouseX) {
-      isDraggable = true;
-      //currentX = mouseX;
-      //currentY = mouseY;
+	if (mouseX && mouseY) {
+        currentX = mouseX;
+        currentY = mouseY;
+        isDragging = true;
     }
+    console.log(isDragging);
   }
 
   function handleMouseUp(e){
-	
-	// clear the drag flag
+	var mouseX = parseInt(e.clientX - offsetX);
+	var mouseY = parseInt(e.clientY - offsetY);
+    // clear the drag flag
+    currentX = mouseX;
+    currentY = mouseY;
 	isDragging=false;
 
   }
 
   function handleMouseOut(e){
-	
-	
+
 	// user has left the canvas, so clear the drag flag
 	isDragging=false;
   }
@@ -43,10 +45,10 @@ function handleMouseDown(e){
   function handleMouseMove(e){
 	  
 	if (isDragging) {
-		canMouseX=parseInt(e.clientX-offsetX);
-        canMouseY=parseInt(e.clientY-offsetY);
-        console.log(canMouseX, canMouseY, e.clientX, e.clientY);
-		ctx.drawImage(currentPic, canMouseX, canMouseY, 150,150);
+		currentX=parseInt(e.clientX-offsetX);
+        currentY=parseInt(e.clientY-offsetY);
+        if(currentPic)
+		    ctx.drawImage(currentPic, currentX - 150 / 2, currentY - 360 / 2, 150, 150);
 	}
 	
 	// if the drag flag is set, clear the canvas and draw the image
@@ -78,7 +80,6 @@ canvas.addEventListener('mouseout', handleMouseOut, false);
             faces[i]
             .addEventListener('click', e => {
                 currentPic = e.target;
-                console.log(currentPic);
             });
         }
     }
@@ -102,11 +103,13 @@ canvas.addEventListener('mouseout', handleMouseOut, false);
     }
 
     function draw() {
-        if(canvas.getContext && uploadedImg && !isDragging) {
+        if(uploadedImg && !isDragging) {
             ctx.drawImage(uploadedImg, 0, 0, canvasWidth, canvasHeight);
         }
-        if (canvas.getContext && currentPic && isDragging) {
-            ctx.drawImage(currentPic, canMouseX, canMouseY, 150, 150);
+        if (currentPic && currentX && currentY) {
+		    ctx.drawImage(currentPic, currentX - 150 / 2, currentY - 360 / 2, 150, 150);
+        } else if (currentPic){
+		    ctx.drawImage(currentPic, 480 / 2 - 75, 360 / 2 - 75, 150, 150);
         }
     }
 
