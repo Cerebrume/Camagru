@@ -5,7 +5,7 @@ function getComments() {
 
 	var http = new XMLHttpRequest();
 	var str = null;
-	var url = "http://localhost/Camagru/posts/getcomments";
+	var url = "/posts/getcomments";
 	http.open('POST', url, true);
 
 	http.onreadystatechange = function () {
@@ -71,10 +71,17 @@ function getLikes() {
 
 	// 	if (this.status == 200) {
 			
+<<<<<<< HEAD
 	// 		str = JSON.parse(this.responseText);
 	// 		likes = str;
 	// 		if (likes) {
 	// 			var user = document.getElementsByClassName('profile__username')[0].innerText.toLowerCase();
+=======
+			str = JSON.parse(this.responseText);
+			likes = str;
+			if (likes) {
+				var user = document.getElementsByClassName('profile__username')[0].innerText.toLowerCase();
+>>>>>>> 2f8377c276a1b1356abf16b2e1d31dcb82c853ec
 				
 	// 			for (let i = 0; i < likes_count.length; i++) {
 	// 				post_id = likes_count[i].getAttribute('post-id');

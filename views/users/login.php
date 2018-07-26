@@ -1,15 +1,24 @@
-<div class="wrapper">
-	<div class="row">
-		<div class="img col-6"><img class="side-img" src="<?php echo ROOT_URL. "assets/img/login-img.jpg" ?>" alt=""></div>
-		<div class="main_text col-6 col--center">
+<div class="container-fluid">
+	<div class="row justify-content-center align-items-center">
+		<div class="img col-3"><img class="side-img" src="<?php echo ROOT_URL. "assets/img/login-img.jpg" ?>" alt=""></div>
+		<div class="main_text offset-1 col-3">
 			<h2>Fill the fields to enter the site</h2>
 			<?php Messages::displayMessage(); ?>
-			<form id="form-login" action="<?php //echo $_SERVER['PHP_SELF']; ?>" method="post">
-				<input type="email" name="email"  id="email" placeholder="sophie@example.com">
-				<input type="password" name="password"  id="passwd" placeholder="Password">
-				<input type="hidden" name="submit" value="true">
-				<input id="submit" class="login" type="submit" value="Login">
-				<span class="form-login__or-register">or <a href="<?php echo ROOT_URL. "users/register" ?>">Register</a></span>
+			<form id="form-register" name="register" action="<?php //echo $_SERVER['PHP_SELF']; ?>" method="post">
+			<div class="input-group input-group-lg">
+				<div class="input-group-prepend">
+					<div class="input-group-text"><img class="input-prepend" src="/Camagru/assets/img/mail-icon.png" alt=""></div>
+				</div>
+				<input class="form-control" type="email" name="email"  id="email" placeholder="sophie@example.com">
+			</div>
+			<div class="input-group input-group-lg">
+				<div class="input-group-prepend">
+					<div class="input-group-text"><img class="input-prepend" src="/Camagru/assets/img/lock-icon.png" alt="lock"></div>
+				</div>
+				<input class="form-control" type="password" name="password"  id="passwd" placeholder="Password">
+			</div>
+			<input type="hidden" name="submit" value="true">
+			<input id="submit-login" class="login-btn btn btn-primary btn-lg" type="submit" value="Login">
 			</form>
 		</div>
 	</div>
