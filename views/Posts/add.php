@@ -31,4 +31,5 @@
 
 </div>
 
-<script src="<?php echo ROOT_URL; ?>assets/js/app.js"></script>
+<!-- <script src="<?php echo ROOT_URL; ?>assets/js/app.js"></script> -->
+<script src="<?php echo ROOT_URL; ?>assets/js/canvas.js"></script>

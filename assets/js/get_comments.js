@@ -5,7 +5,7 @@ function getComments() {
 
 	var http = new XMLHttpRequest();
 	var str = null;
-	var url = "http://localhost/Camagru/posts/getcomments";
+	var url = "/posts/getcomments";
 	http.open('POST', url, true);
 
 	http.onreadystatechange = function () {
@@ -64,7 +64,6 @@ function getLikes() {
 		console.log(fetch('http://localhost/Camagru/posts/getLikes'));		
 		if (this.status == 200) {
 			
-			alert(this.responseText);
 			str = JSON.parse(this.responseText);
 			likes = str;
 			if (likes) {

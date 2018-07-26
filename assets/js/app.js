@@ -6,7 +6,7 @@ var canvas = document.getElementById('canvas');
 var take_pic = document.getElementById('snap');
 var ctx = canvas.getContext('2d');
 var localMediaStream = null;
-var img;
+var uploadedImg;
 var desc = document.getElementById('desc').value;
 var comment = document.getElementById('preview-bg__comment');
 
@@ -153,9 +153,8 @@ function snapshot() {
 	if (localMediaStream) {
 		ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
 		ctx.drawImage(currentPic, canMouseX - 150/2, canMouseY - 150/2, 150, 150);
-		img = convertCanvasToImage(canvas);
-		create_preview(img);
-
+		uploadedImg = convertCanvasToImage(canvas);
+		create_preview(uploadedImg);
 	}
 
 }
@@ -171,12 +170,13 @@ video.addEventListener('play', timerCallback, false);
 
 
 if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-	navigator.mediaDevices.getUserMedia({video: true})
-		.then(function(stream){
+	navigator.mediaDevices
+	.getUserMedia({video: true})
+	.then(function(stream){
 		video.srcObject = stream;
 		video.play();
 		localMediaStream = stream;
-	});
+	}).catch(e => console.log(e))
 }
 
 
