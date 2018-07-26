@@ -103,7 +103,7 @@ canvas.addEventListener('mouseout', handleMouseOut, false);
     }
 
     function draw() {
-        if(uploadedImg && !isDragging) {
+        if(uploadedImg) {
             ctx.drawImage(uploadedImg, 0, 0, canvasWidth, canvasHeight);
         }
         if (currentPic && currentX && currentY) {
