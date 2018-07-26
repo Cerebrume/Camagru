@@ -5,11 +5,21 @@ class UserModel extends Model{
 		if (isset($_SESSION['is_logged_in'])) {
 			header("Location: ". ROOT_URL. "posts");
 		}
-		
+		if (!isset($_SESSION['is_logged_in'])) {
+			
+			Messages::setMessage(print_r($_POST), "error");
+			print_r($_SESSION);
+			$post = json_decode($_POST);
+			print($post);
+			print($_POST);
+			echo 'DECODED';
+			}
+
 		$post = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 		$passwd = password_hash($post['password'], PASSWORD_BCRYPT);
 		if ($post['submit']) {
 			
+
 			$this->query('SELECT login FROM users WHERE login=:login');
 			$this->bind(":login", $post['login']);
 			
@@ -30,11 +40,10 @@ class UserModel extends Model{
 			$this->bind(":password", $passwd);
 			
 			$this->execute();
-			print $this->dbh->lastInsertId();
-			if ($this->dbh->lastInsertId()) {
+			/* if ($this->dbh->lastInsertId()) {
 				echo "HERE!!!!!!!!!!!!!";
 				header('Location: '.ROOT_URL.'users/login');
-			}
+			} */
 		}
 		
 		return;

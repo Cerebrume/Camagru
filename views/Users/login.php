@@ -1,5 +1,5 @@
-<div class="wrapper">
-	<div class="row">
+<div class="">
+	<div >
 		<div class="img col-6"><img class="side-img" src="<?php echo ROOT_URL. "assets/img/login-img.jpg" ?>" alt=""></div>
 		<div class="main_text col-6 col--center">
 			<h2>Fill the fields to enter the site</h2>

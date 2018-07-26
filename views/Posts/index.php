@@ -1,6 +1,6 @@
 
 <div class="content">
-	<div class="wrapper">
+	<div class="">
 		<div class="row--gatters row--space_around">
 			<?php foreach($viewmodel as $item) : ?>
 				<div class="share col-6 " post-id=<?php echo $item['id']; ?>>

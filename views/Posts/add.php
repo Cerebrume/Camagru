@@ -1,7 +1,7 @@
 
 <div class="content">
-	<div class="wrapper">
-		<div class="row">
+	<div class="">
+		<div >
 			<div class="col-6">
 				<div class="camera-canvas">
 					<video id="video" width="480" height="360" autoplay></video>
