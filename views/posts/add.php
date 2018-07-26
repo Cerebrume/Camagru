@@ -1,7 +1,7 @@
 
 <div class="container-fluid">
-	<div class="row">
-		<div class="col-6">
+	<div class="row justify-content-center">
+		<div class="col-5">
 			<div class="camera-canvas">
 				<video id="video" width="480" height="360" autoplay></video>
 				<canvas id="canvas" width="480" height="360"></canvas>
@@ -23,7 +23,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="post-add col-6">
+		<div class="post-add col-5">
 			<h3 class="file-h3">CHOSE PHOTO FROM FOLDER:</h3>
 				<input class="post-add__file" type="file" name="file" id="file" accept=".png, .jpg, .jpeg">
 				<h3 class="comment-h3">YOUR COMMENT:</h3>

@@ -366,11 +366,6 @@ p.arror_text {
   cursor: pointer;
 }
 
-.camera-images img {
-  width: 200px;
-  height: 200px;
-}
-
 .comment {
   display: flex;
   flex-direction: column;
@@ -394,6 +389,10 @@ p.arror_text {
   to {
     opacity: 0;
   }
+}
+
+.face-preset {
+  width: 100%;
 }
 
 /*

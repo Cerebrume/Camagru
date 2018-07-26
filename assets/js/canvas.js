@@ -47,8 +47,7 @@ function handleMouseDown(e){
 	if (isDragging) {
 		currentX=parseInt(e.clientX-offsetX);
         currentY=parseInt(e.clientY-offsetY);
-        if(currentPic)
-		    ctx.drawImage(currentPic, currentX - 150 / 2, currentY - 360 / 2, 150, 150);
+        
 	}
 	
 	// if the drag flag is set, clear the canvas and draw the image
@@ -107,7 +106,7 @@ canvas.addEventListener('mouseout', handleMouseOut, false);
             ctx.drawImage(uploadedImg, 0, 0, canvasWidth, canvasHeight);
         }
         if (currentPic && currentX && currentY) {
-		    ctx.drawImage(currentPic, currentX - 150 / 2, currentY - 360 / 2, 150, 150);
+		    ctx.drawImage(currentPic, currentX - 300 / 2, currentY - 200 / 2, 150, 150);
         } else if (currentPic){
 		    ctx.drawImage(currentPic, 480 / 2 - 75, 360 / 2 - 75, 150, 150);
         }
@@ -116,7 +115,7 @@ canvas.addEventListener('mouseout', handleMouseOut, false);
     setInterval(function() {
         ctx.clearRect(0,0,canvas.width,canvas.height);
         draw();
-      }, 100);
+      }, 10);
 
 
 /*END FILE UPLOAD*/
