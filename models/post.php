@@ -98,7 +98,9 @@ class PostModel extends Model{
 			try {
 				$this->query('SELECT * FROM likes;');
 				$rows = $this->resultSet();
-				return json_encode($rows);
+				echo 'YA TUTA';
+				print_r($rows);
+				return $rows;//json_encode($rows);
 			} catch (PDOException $e) {
 				echo 'Connection failed: ' . $e->getMessage();
 			}

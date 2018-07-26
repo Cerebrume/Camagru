@@ -35,7 +35,7 @@
 			like_post_id INT(6),
 			like_date TIMESTAMP
 		);");
-		$db->exec($sql);
+		$db->exec($sql);	
 	} catch (PDOException $e) {
 		echo '1Connection failed: ' . $e->getMessage();
 	}

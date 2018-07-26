@@ -51,55 +51,61 @@ var likes_count = document.getElementsByClassName('likes_count');
 var is_liked = null;
 
 function getLikes() {
-
-	var http = new XMLHttpRequest();
-	var str = null;
-	var number_likes = 0;
 	var url = "http://localhost/Camagru/posts/getLikes";
-	http.open('POST', url, true);
+	fetch(url)
+	.then(function(response) {
+		console.log(response);
+		return response.json();
+	  })
+	  .then(function(myJson) {
+		console.log(myJson);
+	  });
+	// var http = new XMLHttpRequest();
+	// var str = null;
+	// var number_likes = 0;
+	// var url = "http://localhost/Camagru/posts/getLikes";
+	// http.open('POST', url, true);
 
-	http.onreadystatechange = function () {
-		if (this.readyState != 4) return;
+	// http.onreadystatechange = function () {
+	// 	if (this.readyState != 4) return;
 
-		console.log(fetch('http://localhost/Camagru/posts/getLikes'));		
-		if (this.status == 200) {
+	// 	if (this.status == 200) {
 			
-			alert(this.responseText);
-			str = JSON.parse(this.responseText);
-			likes = str;
-			if (likes) {
-				var user = document.getElementsByClassName('profile__username')[0].innerText.toLowerCase();
+	// 		str = JSON.parse(this.responseText);
+	// 		likes = str;
+	// 		if (likes) {
+	// 			var user = document.getElementsByClassName('profile__username')[0].innerText.toLowerCase();
 				
-				for (let i = 0; i < likes_count.length; i++) {
-					post_id = likes_count[i].getAttribute('post-id');
-					for(let j = 0; j < likes.length; j++) {
+	// 			for (let i = 0; i < likes_count.length; i++) {
+	// 				post_id = likes_count[i].getAttribute('post-id');
+	// 				for(let j = 0; j < likes.length; j++) {
 						
-						if (post_id == likes[j]['like_post_id']) {
-							number_likes++;
+	// 					if (post_id == likes[j]['like_post_id']) {
+	// 						number_likes++;
 							
-						}
-						if (user == likes[j]['like_user'].toLowerCase() && (post_id == likes[j]['like_post_id'])) {
-							let liked = document.querySelector('.like[post-id="'+ post_id + '"]');
-							liked.setAttribute('disbled', true);
-							liked.classList.add('liked');
-						}
+	// 					}
+	// 					if (user == likes[j]['like_user'].toLowerCase() && (post_id == likes[j]['like_post_id'])) {
+	// 						let liked = document.querySelector('.like[post-id="'+ post_id + '"]');
+	// 						liked.setAttribute('disbled', true);
+	// 						liked.classList.add('liked');
+	// 					}
 
-					}
-					// insert likes number
-					likes_count[i].innerText = number_likes;
-					number_likes = 0;
+	// 				}
+	// 				// insert likes number
+	// 				likes_count[i].innerText = number_likes;
+	// 				number_likes = 0;
 					
-				}
-			}
-		}
-		else {
-			console.log( "Status: " + http.status + ': ' + http.statusText );
-		}
-	}
+	// 			}
+	// 		}
+	// 	}
+	// 	else {
+	// 		console.log( "Status: " + http.status + ': ' + http.statusText );
+	// 	}
+	// }
 
-	http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-	http.send("");
-	return str;
+	// http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	// http.send("");
+	// return str;
 }
 
 getLikes();

@@ -81,7 +81,7 @@ function like() {
 		if (this.readyState != 4) return;
 
 		if (this.status == 200) {
-			//console.log(this.responseText);
+			console.log(this.responseText);
 		}
 		else {
 			console.log( "Status: " + http.status + ': ' + http.statusText );
