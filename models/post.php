@@ -48,16 +48,19 @@ class PostModel extends Model{
 	}
 
 	public function comment() {
-		if ($_SESSION['is_logged_in'] && isset($_POST['submit_comment'])) {
-			$post = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+		
+		if ($_SESSION['is_logged_in']) {
+			$post = json_decode(file_get_contents('php://input'), true);
+			if (!$post['submit']) return;
 			try {
 				$this->query('INSERT INTO comments (comment_user, comment_desc, comment_post_id) VALUES(:user, :post_desc, :id)');
 				$this->bind(":user", $_SESSION['user_data']['login']);
 				$this->bind(":post_desc", $post['comment_desc']);
 				$this->bind(":id", $post['comment_post_id']);
-				$this->execute();
+				$rows = $this->execute();
+				return  $arrayName = array('Added' => 'true');
 			} catch (PDOException $e) {
-				echo 'Connection failed: ' . $e->getMessage();
+				return $arrayName = array('Connection failed:' => $e->getMessage());
 			}
 		}
 		return;
@@ -68,7 +71,7 @@ class PostModel extends Model{
 			try {
 				$this->query('SELECT * FROM comments ORDER BY comment_date ASC');
 				$rows = $this->resultSet();
-				return json_encode($rows);
+				return $rows;
 			} catch (PDOException $e) {
 				echo 'Connection failed: ' . $e->getMessage();
 			}
@@ -77,15 +80,15 @@ class PostModel extends Model{
 	}
 
 	public function like() {
-		if ($_SESSION['is_logged_in'] && isset($_POST['submit_like'])) {
-			$post = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+		if ($_SESSION['is_logged_in']) {
+			$post = json_decode(file_get_contents('php://input'), true);
+			if (!$post['submit_like']) return;
 			try {
 				$this->query('INSERT INTO likes (like_user, like_post_id) SELECT * FROM (SELECT :user, :post_id) AS tmp WHERE NOT EXISTS (SELECT like_user, like_post_id FROM likes WHERE like_user = :user and like_post_id = :post_id) LIMIT 1');
 				$this->bind(":user", $_SESSION['user_data']['login']);
 				$this->bind(":post_id", $post['post_id']);
-				/* $this->bind(":like_user", $_SESSION['user_data']['login']); */
-
 				$this->execute();
+				return $arrayName = array('Added' => 'true');
 			} catch (PDOException $e) {
 				echo 'Connection failed: ' . $e->getMessage();
 			}
@@ -98,9 +101,7 @@ class PostModel extends Model{
 			try {
 				$this->query('SELECT * FROM likes;');
 				$rows = $this->resultSet();
-				echo 'YA TUTA';
-				print_r($rows);
-				return $rows;//json_encode($rows);
+				return $rows;
 			} catch (PDOException $e) {
 				echo 'Connection failed: ' . $e->getMessage();
 			}

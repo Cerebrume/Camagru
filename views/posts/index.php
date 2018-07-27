@@ -1,9 +1,8 @@
 
 <div class="container-fluid">
 	<div class="row justify-content-center">
-		<div class="col-4">
 			<?php foreach($viewmodel as $item) : ?>
-				<div class="share" post-id=<?php echo $item['id']; ?>>
+				<div class="share col-4" post-id=<?php echo $item['id']; ?>>
 					<h3 class="share_user"><?php echo $item['post_user']; ?></h3>
 					<img class="share_img" src=<?php echo $item['img']; ?> alt="">
 					<div class="share_like">
@@ -21,14 +20,16 @@
 					<div class="comment">
 						<textarea name="comment" style="resize:none;" maxlength="200" id=<?php $id = $item['id']."-post__comment"; echo $id;?>></textarea>
 
-						<input class="btn btn-primary brn-sm" type="button" value="Comment" post-id=<?php echo $item['id']; ?>>
+						<input class="btn btn-primary brn-sm btn-submit-comment" type="button" value="Comment" post-id=<?php echo $item['id']; ?>>
 					</div>
 					<small class="share_date"><?php echo $item['post_date']; ?></small>
 				</div>
 			<?php endforeach; ?>
-		</div>
+
 	</div>
 </div>
 
 <script src="<?php echo ROOT_URL; ?>assets/js/add_comment.js"></script>
-<script src="<?php echo ROOT_URL; ?>assets/js/get_comments.js"></script>
+<script src="<?php echo ROOT_URL; ?>assets/js/add_like.js"></script>
+<script src="<?php echo ROOT_URL; ?>assets/js/getComments.js"></script>
+<script src="<?php echo ROOT_URL; ?>assets/js/getLikes.js"></script>
