@@ -24,7 +24,10 @@
 				</div>
 			</div>
 			<input type="hidden" name="submit" value="true">
-			<input id="submit-login" class="login-btn btn btn-primary btn-lg" type="submit" value="Login">
+			<div class="btn-group btn-group-lg" role="group">
+				<input id="submit-login" class="login-btn btn btn-primary btn-lg" type="submit" value="Login">
+				<a class="link_to_register" href="<?php echo ROOT_URL; ?>users/register" class="">or Register</a>
+			</div>
 			</form>
 		</div>
 	</div>

@@ -222,6 +222,16 @@ a:hover {
   display: block;
 }
 
+.link_to_register {
+  margin-top: 1rem;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+  color: black;
+  margin-left: 10px;
+}
+
 /*
 ** FOOTER
 */
