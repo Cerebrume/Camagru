@@ -126,11 +126,12 @@ class UserModel extends Model{
 	public function verify() {
 		$get = filter_input_array(INPUT_GET, FILTER_SANITIZE_STRING);
 		if (isset($get['hash'])) {
+			var_dump($get);
 			// fetch from bd
 			// if true set isVerifyed true
 		}
 		else {
-			header('Location: '.ROOT_URL);
+			/* header('Location: '.ROOT_URL); */
 		}
 		return;
 	}
