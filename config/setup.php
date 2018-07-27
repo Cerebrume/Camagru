@@ -44,7 +44,13 @@
 			like_post_id INT(6),
 			like_date TIMESTAMP
 		);");
-		$db->exec($sql);	
+		$db->exec($sql);
+		$sql = ("CREATE TABLE IF NOT EXISTS VERIFICATION (
+			id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+			login_user VARCHAR(255) NOT NULL,
+			verificationCode VARCHAR(255) NOT NULL
+		);");
+		$db->exec($sql);
 	} catch (PDOException $e) {
 		echo '1Connection failed: ' . $e->getMessage();
 	}

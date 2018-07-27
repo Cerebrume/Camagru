@@ -30,9 +30,8 @@ password.addEventListener('focus', () => {
 	passwdErrorMessage.style.display = 'none'
 	password.classList.remove('bg-danger');
 });
-register_form.addEventListener('submit', submition);
 
-
+register_btn.style.display = 'block';
 function valid_login() {
 	var value = login.value;
 
