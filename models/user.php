@@ -5,7 +5,7 @@ class UserModel extends Model{
 		if (isset($_SESSION['is_logged_in'])) {
 			header("Location: ". ROOT_URL. "posts");
 		}
-
+		var_dump($_POST);
 		$post = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 		$passwd = password_hash($post['password'], PASSWORD_BCRYPT);
 		if ($post['submit']) {

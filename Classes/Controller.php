@@ -13,7 +13,7 @@ abstract class Controller {
 	}
 
 	protected function returnView($viewmodel, $fullview){
-		$view = 'views/'. get_class($this). '/' . $this->action. '.php';
+		$view = 'views/'. strtolower(get_class($this)). '/' . $this->action. '.php';
 		if($fullview){
 			require('views/main.php');
 		} else {
