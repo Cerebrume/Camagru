@@ -3,7 +3,7 @@
 }
 
 html {
-  font-size: 10px;
+  font-size: 16px;
   height: 100%;
   width: 100%;
 }
@@ -19,6 +19,9 @@ html {
   margin-left: 0;
   margin-right: 0;
 }
+
+
+
 
 p.nomargin {
 	margin: 0;

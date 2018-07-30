@@ -61,7 +61,7 @@ class PostModel extends Model{
 				$this->bind(":post_desc", $post['comment_desc']);
 				$this->bind(":id", $post['comment_post_id']);
 				$rows = $this->execute();
-				return  $arrayName = array('Added' => 'true');
+				return  $arrayName = array('Added' => true);
 			} catch (PDOException $e) {
 				return $arrayName = array('Connection failed:' => $e->getMessage());
 			}
@@ -91,7 +91,7 @@ class PostModel extends Model{
 				$this->bind(":user", $_SESSION['user_data']['login']);
 				$this->bind(":post_id", $post['post_id']);
 				$this->execute();
-				return $arrayName = array('Added' => 'true');
+				return $arrayName = array('Added' => true);
 			} catch (PDOException $e) {
 				echo 'Connection failed: ' . $e->getMessage();
 			}

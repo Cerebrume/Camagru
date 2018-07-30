@@ -41,4 +41,9 @@ class Users extends Controller{
 		$viewmodel = new UserModel();
 		$this->returnView($viewmodel->profile(), true);
 	}
+
+	protected function changeLogin() {
+		$viewmodel = new UserModel();
+		$this->returnView($viewmodel->changeLogin(), false);
+	}
 }
