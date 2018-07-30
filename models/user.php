@@ -158,9 +158,10 @@ class UserModel extends Model{
 	}
 
 	public function changeLogin() {
-		return $arrayName = array('Changed' => true);
 		if (isset($_POST) && isset($_POST['changeLogin'])) {
 			return var_dump($_POST);
+			return $arrayName = array('Changed' => true);
+
 		}
 	}
 
