@@ -21,7 +21,8 @@ class UserModel extends Model{
 		$header .= "Date: ".date("r (T)")." \r\n";
 		$header .= iconv_mime_encode("Subject", $mail_subject, $subject_preferences);
 
-		$hash = password_hash($mail . $login, PASSWORD_BCRYPT);
+		$bytes = openssl_random_pseudo_bytes(32);
+		$hash = bin2hex($bytes);// password_hash($mail . $login, PASSWORD_BCRYPT);
 		$mail_message = '
 		<html>
 			<body>
@@ -34,21 +35,20 @@ class UserModel extends Model{
 		------------------------
 		</pre>
 		Please click this link to activate your account: ';
-		$mail_message .= 'http://localhost' . ROOT_URL . 'users/verify?hash='.$hash;
+		$mail_message .= 'http://localhost' . ROOT_URL . 'users/verify/'.$hash;
 		$mail_message .= '</body></html>';
-		// Send mail
-				
+		try {
+			$this->query('INSERT INTO verification (login_user, verificationCode) VALUES(:login_user, :verificationCode)');
+			$this->bind(":login_user", $login);
+			$this->bind(":verificationCode", $hash);
+			$this->execute();
+		}
+		catch (PDOException $e) {
+			echo 'Connection failed: ' . $e->getMessage();
+		}
+		// Send mail	
 		$mailSent = mail($email, $mail_subject, $mail_message, $header);
 		if ($mailSent) {
-			try {
-				$this->query('INSERT INTO verification (login_user, verificationCode) VALUES(:login_user, :verificationCode)');
-				$this->bind(":login_user", $login);
-				$this->bind(":verificationCode", $hash);
-				$this->execute();
-			}
-			catch (PDOException $e) {
-				echo 'Connection failed: ' . $e->getMessage();
-			}
 			header('Location: '.ROOT_URL.'users/verify');
 		}
 		else {
@@ -89,7 +89,6 @@ class UserModel extends Model{
 			if ($this->dbh->lastInsertId()) {
 				// send verif mail
 				$this->sendVerifMail($post['email'], $post['login']);
-				
 			}
 		}
 		
@@ -125,13 +124,28 @@ class UserModel extends Model{
 
 	public function verify() {
 		$get = filter_input_array(INPUT_GET, FILTER_SANITIZE_STRING);
-		if (isset($get['hash'])) {
-			var_dump($get);
-			// fetch from bd
-			// if true set isVerifyed true
-		}
-		else {
-			/* header('Location: '.ROOT_URL); */
+		if (isset($get['id'])) {
+			try {
+				$this->query('SELECT * FROM verification WHERE verificationCode=:id');
+				$this->bind(":id", $get['id']);
+				$this->execute();
+				$result = $this->single();
+				if ($result) {
+					$this->query('UPDATE users SET isActivated=1 WHERE `login`=:username');
+					$this->bind(":username", $result['login_user']);
+					$this->execute();
+					Messages::setMessage("Email verification completed", "success");
+					header("Location: ". ROOT_URL. "users/login");
+				}
+				return;
+			}
+			catch (PDOException $e) {
+				echo 'Connection failed: ' . $e->getMessage();
+			}
+		} else {
+			Messages::setMessage("Please verify your account before you can use it.", "success");
+			header("Location: ". ROOT_URL. "users/login");
+			return;
 		}
 		return;
 	}

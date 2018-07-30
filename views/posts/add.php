@@ -1,5 +1,5 @@
 
-<div class="container-fluid">
+<div class="container-fluid no-select">
 	<div class="row justify-content-center">
 		<div class="col-5">
 			<div class="camera-canvas">

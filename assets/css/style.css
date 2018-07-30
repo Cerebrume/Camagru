@@ -29,15 +29,18 @@ body {
   padding: 0;
   width: 100%;
   position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.no-select {
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -khtml-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
 }
 
 .content {
@@ -416,7 +419,7 @@ p.arror_text {
 ** Messages
 */
 
-.alert {
+.alert-custom {
   width: 20rem;
   display: flex;
   font-size: 1.2rem;
@@ -432,6 +435,11 @@ p.arror_text {
 
 .alert-danger {
   background-color: #cc1212;
+  color: #fff;
+}
+
+.alert-success {
+  background-color: #1afc5e;
   color: #fff;
 }
 

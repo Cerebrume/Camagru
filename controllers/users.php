@@ -34,6 +34,6 @@ class Users extends Controller{
 
 	protected function verify() {
 		$viewmodel = new UserModel();
-		$this->returnView($viewmodel->verify(), true);
+		$this->returnView($viewmodel->verify(), false);
 	}
 }
