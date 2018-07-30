@@ -36,4 +36,9 @@ class Users extends Controller{
 		$viewmodel = new UserModel();
 		$this->returnView($viewmodel->verify(), false);
 	}
+
+	protected function profile() {
+		$viewmodel = new UserModel();
+		$this->returnView($viewmodel->profile(), true);
+	}
 }

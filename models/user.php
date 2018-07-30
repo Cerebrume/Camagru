@@ -158,4 +158,15 @@ class UserModel extends Model{
 		header("Location: ". ROOT_URL. "users/login");
 		return;
 	}
+
+	public function profile() {
+		if (!isset($_SESSION['is_logged_in'])) {
+			header("Location: ". ROOT_URL. "users");
+		}
+		$this->query("SELECT * FROM users WHERE `login`=:username");
+		$this->bind(':username', $_SESSION['user_data']['login']);
+		$result = $this->single();
+		var_dump($result);
+
+	}
 }
