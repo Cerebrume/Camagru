@@ -10,7 +10,7 @@
 			login VARCHAR(255) NOT NULL,
 			email VARCHAR(255),
 			password VARCHAR(128),
-			isActivated BOOLEAN,
+			isActivated BOOLEAN NOT NULL,
 			reg_date TIMESTAMP
 		);");
 		$db->exec($sql);

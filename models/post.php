@@ -5,7 +5,7 @@ class PostModel extends Model{
 			header("Location: ". ROOT_URL);
 		}
 		$page = isset($_GET['id']) ? (int)$_GET['id'] : 0;
-		$per_page = 5;
+		$per_page = 6;
 		$_GET['id'] = htmlentities($_GET['id']);
 		if(isset($_GET['id']) && is_numeric($_GET['id'])) {
 			$page = $_GET['id'];

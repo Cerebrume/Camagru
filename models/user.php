@@ -49,7 +49,8 @@ class UserModel extends Model{
 		// Send mail	
 		$mailSent = mail($email, $mail_subject, $mail_message, $header);
 		if ($mailSent) {
-			header('Location: '.ROOT_URL.'users/verify');
+			Messages::setMessage("Check your mail for varification.", "success");
+			header("Location: ". ROOT_URL. "users/login");
 		}
 		else {
 			Messages::setMessage("Error sending varification email" . $mailSent, "error");
@@ -107,7 +108,10 @@ class UserModel extends Model{
 			$this->execute();
 			$result = $this->stmt->fetch(PDO::FETCH_ASSOC);
 			$isPasswordCorrect = password_verify($_POST['password'], $result['password']);
-			if ($isPasswordCorrect && $result) {
+			if ($result['isActivated'] !== '1') {
+				Messages::setMessage("Verify your account.", "error");
+			}
+			else if ($isPasswordCorrect && $result) {
 				$_SESSION['is_logged_in'] = true;
 				$_SESSION['user_data'] = array(
 					"id"	=> $result['id'],
@@ -130,23 +134,28 @@ class UserModel extends Model{
 				$this->bind(":id", $get['id']);
 				$this->execute();
 				$result = $this->single();
+				var_dump($get);
+
 				if ($result) {
+
 					$this->query('UPDATE users SET isActivated=1 WHERE `login`=:username');
 					$this->bind(":username", $result['login_user']);
 					$this->execute();
 					Messages::setMessage("Email verification completed", "success");
 					header("Location: ". ROOT_URL. "users/login");
 				}
+				else {
+					Messages::setMessage("Error while verification account", "error");
+					header("Location: ". ROOT_URL. "users/register");
+				}
 				return;
 			}
 			catch (PDOException $e) {
 				echo 'Connection failed: ' . $e->getMessage();
 			}
-		} else {
-			Messages::setMessage("Please verify your account before you can use it.", "success");
-			header("Location: ". ROOT_URL. "users/login");
-			return;
 		}
+		Messages::setMessage("Please verify your account before you can use it.", "success");
+		header("Location: ". ROOT_URL. "users/login");
 		return;
 	}
 }
