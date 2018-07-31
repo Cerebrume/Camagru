@@ -11,6 +11,7 @@ newLoginInput.addEventListener('focus', function() {
 })
 
 function loginChangedSuccess(res) {
+    console.log(res)
     loginChangeRequestInProgress = false;
     if ( res && res.Changed) {
         validMessageNewLogin.style.display = 'block';
@@ -22,7 +23,6 @@ function loginChangedSuccess(res) {
 
 function makeUrl(url, endpoint) {
     let newUrl = url.split('/');
-
 
     return `http://${newUrl[2]}/${newUrl[3]}/${newUrl[4]}/${endpoint}`
 }
@@ -203,7 +203,7 @@ function changePass() {
                 newPassword: newPassValue
             })
         })
-        .then(res => res.text())
+        .then(res => res.json())
         .then(passChangedSuccess)
         .catch(e => {
             console.log(e)
