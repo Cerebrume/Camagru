@@ -158,11 +158,77 @@ class UserModel extends Model{
 	}
 
 	public function changeLogin() {
-		if (isset($_POST) && isset($_POST['changeLogin'])) {
-			return var_dump($_POST);
-			return $arrayName = array('Changed' => true);
+		$post = json_decode(file_get_contents('php://input'), true);
+		if (isset($post['newLogin']) && isset($post['changeLogin'])) {
+			try {
+				$this->query('UPDATE users SET login=:newLogin WHERE `login`=:currentLogin');
+				$this->bind(":newLogin", $post['newLogin']);
+				$this->bind(":currentLogin", $_SESSION['user_data']['login']);
+				$this->execute();
+				$result = $this->execute();
+				$this->query('UPDATE likes SET like_user=:newLogin WHERE like_user=:currentLogin');
+				$this->bind(":newLogin", $post['newLogin']);
+				$this->bind(":currentLogin", $_SESSION['user_data']['login']);
+				$result = $this->execute();
+				$this->query('UPDATE comments SET comment_user=:newLogin WHERE comment_user=:currentLogin');
+				$this->bind(":newLogin", $post['newLogin']);
+				$this->bind(":currentLogin", $_SESSION['user_data']['login']);
+				$result = $this->execute();
 
+				$_SESSION['user_data']['login'] = $post['newLogin'];
+				return $arrayName = array('Changed' => true);
+			}
+			catch (PDOException $e) {
+				echo 'Connection failed: ' . $e->getMessage();
+				return $arrayName = array('Changed' => false);
+			}
 		}
+	}
+
+	public function changeEmail() {
+		$post = json_decode(file_get_contents('php://input'), true);
+		if (isset($post['newEmail']) && isset($post['changeEmail'])) {
+			try {
+				$this->query('UPDATE users SET email=:newEmail WHERE email=:currentEmail');
+				$this->bind(":newEmail", $post['newEmail']);
+				$this->bind(":currentEmail", $_SESSION['user_data']['email']);
+				$this->execute();
+						
+				$_SESSION['user_data']['email'] = $post['newEmail'];
+				return $arrayName = array('Changed' => true);
+			}
+			catch (PDOException $e) {
+				echo 'Connection failed: ' . $e->getMessage();
+				return $arrayName = array('Changed' => false);
+			}
+		}
+	}
+
+	public function changePassword() {
+		$post = json_decode(file_get_contents('php://input'), true);
+		if (isset($post['changePassword'])
+			&& isset($post['currentPassword'])
+			&& isset($post['newPassword'])) {
+			try {
+				$this->query('SELECT * FROM users WHERE `login`=:username');
+				$this->bind(":username", $_SESSION['user_data']['login']);
+				$result = $this->single();
+				$isPasswordCorrect = password_verify($post['currentPassword'], $result['password']);
+				if ($result && $isPasswordCorrect) {
+					$passwd = password_hash($post['newPassword'], PASSWORD_BCRYPT);
+					$this->query('UPDATE users SET `password`=:newPassword WHERE `password`=:currentPassword');
+					$this->bind(":newPassword", $passwd);
+					$this->bind(":currentPassword", $post['currentPassword']);
+					$this->execute();
+					return $arrayName = array('Changed' => true);
+				}
+			}
+			catch (PDOException $e) {
+				echo 'Connection failed: ' . $e->getMessage();
+				return $arrayName = array('Changed' => false);
+			}
+		}
+		return $arrayName = array('Changed' => false);
 	}
 
 	public function profile() {

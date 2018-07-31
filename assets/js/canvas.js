@@ -23,7 +23,6 @@ function handleMouseDown(e){
         currentY = mouseY;
         isDragging = true;
     }
-    console.log(isDragging);
   }
 
   function handleMouseUp(e){

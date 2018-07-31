@@ -1,0 +1,46 @@
+[2018-07-27 17:54:26.947] [exthost1] [info] extension host started
+[2018-07-27 17:54:26.981] [exthost1] [info] ExtensionService#_doActivateExtension vscode.emmet {"startup":true,"activationEvent":"*"}
+[2018-07-27 17:54:26.981] [exthost1] [info] ExtensionService#loadCommonJSModule /usr/share/code/resources/app/extensions/emmet/out/extension
+[2018-07-27 17:54:27.106] [exthost1] [info] ExtensionService#_doActivateExtension vscode.git {"startup":true,"activationEvent":"*"}
+[2018-07-27 17:54:27.106] [exthost1] [info] ExtensionService#loadCommonJSModule /usr/share/code/resources/app/extensions/git/out/main
+[2018-07-27 17:54:27.452] [exthost1] [info] ExtensionService#_doActivateExtension vscode.merge-conflict {"startup":true,"activationEvent":"*"}
+[2018-07-27 17:54:27.452] [exthost1] [info] ExtensionService#loadCommonJSModule /usr/share/code/resources/app/extensions/merge-conflict/out/extension
+[2018-07-27 17:54:27.475] [exthost1] [info] ExtensionService#_doActivateExtension vscode.search-rg {"startup":true,"activationEvent":"*"}
+[2018-07-27 17:54:27.475] [exthost1] [info] ExtensionService#loadCommonJSModule /usr/share/code/resources/app/extensions/search-rg/out/extension
+[2018-07-27 17:54:27.507] [exthost1] [info] ExtensionService#_doActivateExtension 2gua.rainbow-brackets {"startup":true,"activationEvent":"*"}
+[2018-07-27 17:54:27.507] [exthost1] [info] ExtensionService#loadCommonJSModule /home/dmitry/.vscode/extensions/2gua.rainbow-brackets-0.0.6/out/src/extension
+[2018-07-27 17:54:27.511] [exthost1] [info] ExtensionService#_doActivateExtension Zignd.html-css-class-completion {"startup":true,"activationEvent":"*"}
+[2018-07-27 17:54:27.511] [exthost1] [info] ExtensionService#loadCommonJSModule /home/dmitry/.vscode/extensions/Zignd.html-css-class-completion-1.17.1/out/src/extension
+[2018-07-27 17:54:28.096] [exthost1] [info] ExtensionService#_doActivateExtension christian-kohler.path-intellisense {"startup":true,"activationEvent":"*"}
+[2018-07-27 17:54:28.096] [exthost1] [info] ExtensionService#loadCommonJSModule /home/dmitry/.vscode/extensions/christian-kohler.path-intellisense-1.4.2/out/src/extension
+[2018-07-27 17:54:28.115] [exthost1] [info] ExtensionService#_doActivateExtension cssho.vscode-svgviewer {"startup":true,"activationEvent":"*"}
+[2018-07-27 17:54:28.115] [exthost1] [info] ExtensionService#loadCommonJSModule /home/dmitry/.vscode/extensions/cssho.vscode-svgviewer-1.4.4/out/src/extension
+[2018-07-27 17:54:28.151] [exthost1] [info] ExtensionService#_doActivateExtension dbaeumer.vscode-eslint {"startup":true,"activationEvent":"*"}
+[2018-07-27 17:54:28.151] [exthost1] [info] ExtensionService#loadCommonJSModule /home/dmitry/.vscode/extensions/dbaeumer.vscode-eslint-1.4.12/client/out/extension
+[2018-07-27 17:54:28.226] [exthost1] [info] ExtensionService#_doActivateExtension Equinusocio.vsc-material-theme {"startup":true,"activationEvent":"*"}
+[2018-07-27 17:54:28.226] [exthost1] [info] ExtensionService#loadCommonJSModule /home/dmitry/.vscode/extensions/equinusocio.vsc-material-theme-2.3.0/extensions/material.theme.config.js
+[2018-07-27 17:54:28.260] [exthost1] [info] ExtensionService#_doActivateExtension esbenp.prettier-vscode {"startup":true,"activationEvent":"*"}
+[2018-07-27 17:54:28.260] [exthost1] [info] ExtensionService#loadCommonJSModule /home/dmitry/.vscode/extensions/esbenp.prettier-vscode-1.5.0/out/src/extension
+[2018-07-27 17:54:28.430] [exthost1] [info] ExtensionService#_doActivateExtension formulahendry.auto-close-tag {"startup":true,"activationEvent":"*"}
+[2018-07-27 17:54:28.430] [exthost1] [info] ExtensionService#loadCommonJSModule /home/dmitry/.vscode/extensions/formulahendry.auto-close-tag-0.5.6/out/src/extension
+[2018-07-27 17:54:28.433] [exthost1] [info] ExtensionService#_doActivateExtension formulahendry.auto-rename-tag {"startup":true,"activationEvent":"*"}
+[2018-07-27 17:54:28.433] [exthost1] [info] ExtensionService#loadCommonJSModule /home/dmitry/.vscode/extensions/formulahendry.auto-rename-tag-0.0.15/out/src/extension
+[2018-07-27 17:54:28.436] [exthost1] [info] ExtensionService#_doActivateExtension lihui.vs-color-picker {"startup":true,"activationEvent":"*"}
+[2018-07-27 17:54:28.436] [exthost1] [info] ExtensionService#loadCommonJSModule /home/dmitry/.vscode/extensions/lihui.vs-color-picker-0.7.0/out/src/extension
+[2018-07-27 17:54:28.444] [exthost1] [info] ExtensionService#_doActivateExtension naumovs.color-highlight {"startup":true,"activationEvent":"*"}
+[2018-07-27 17:54:28.444] [exthost1] [info] ExtensionService#loadCommonJSModule /home/dmitry/.vscode/extensions/naumovs.color-highlight-2.3.0/dist/extension
+[2018-07-27 17:54:28.490] [exthost1] [info] ExtensionService#_doActivateExtension PKief.material-icon-theme {"startup":true,"activationEvent":"*"}
+[2018-07-27 17:54:28.491] [exthost1] [info] ExtensionService#loadCommonJSModule /home/dmitry/.vscode/extensions/pkief.material-icon-theme-3.5.2/out/src/extension
+[2018-07-27 17:54:28.537] [exthost1] [info] eager extensions activated
+[2018-07-27 17:54:28.541] [exthost1] [info] ExtensionService#_doActivateExtension vscode.php-language-features {"startup":false,"activationEvent":"onLanguage:php"}
+[2018-07-27 17:54:28.541] [exthost1] [info] ExtensionService#loadCommonJSModule /usr/share/code/resources/app/extensions/php-language-features/out/phpMain
+[2018-07-27 18:28:29.500] [exthost1] [info] ExtensionService#_doActivateExtension vscode.configuration-editing {"startup":false,"activationEvent":"onLanguage:json"}
+[2018-07-27 18:28:29.500] [exthost1] [info] ExtensionService#loadCommonJSModule /usr/share/code/resources/app/extensions/configuration-editing/out/extension
+[2018-07-27 18:28:29.523] [exthost1] [info] ExtensionService#_doActivateExtension vscode.extension-editing {"startup":false,"activationEvent":"onLanguage:json"}
+[2018-07-27 18:28:29.523] [exthost1] [info] ExtensionService#loadCommonJSModule /usr/share/code/resources/app/extensions/extension-editing/out/extension
+[2018-07-27 18:28:29.549] [exthost1] [info] ExtensionService#_doActivateExtension vscode.json-language-features {"startup":false,"activationEvent":"onLanguage:json"}
+[2018-07-27 18:28:29.549] [exthost1] [info] ExtensionService#loadCommonJSModule /usr/share/code/resources/app/extensions/json-language-features/client/out/jsonMain
+[2018-07-27 18:28:29.767] [exthost1] [info] ExtensionService#_doActivateExtension vscode.npm {"startup":false,"activationEvent":"onLanguage:json"}
+[2018-07-27 18:28:29.767] [exthost1] [info] ExtensionService#loadCommonJSModule /usr/share/code/resources/app/extensions/npm/out/main
+[2018-07-27 18:28:29.835] [exthost1] [info] ExtensionService#_doActivateExtension eg2.vscode-npm-script {"startup":false,"activationEvent":"onLanguage:json"}
+[2018-07-27 18:28:29.835] [exthost1] [info] ExtensionService#loadCommonJSModule /home/dmitry/.vscode/extensions/eg2.vscode-npm-script-0.3.5/out/src/main

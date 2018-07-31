@@ -10,14 +10,14 @@
                         <div class="row">
                             <div class="col-12 mb-3 mt-3">
                                 <h5 class="card-title">Your login:
-                                    <b>
+                                    <b id="your_login">
                                         <?php echo $_SESSION['user_data']['login']?>
                                     </b>
                                 </h5>
                                 <div class="input-group mb-3">
                                     <input type="text" class="form-control" placeholder="New login" id="newLogin">
                                     <div class="invalid-feedback invalid-feedback-newLogin">
-                                        Login should be at least 6 symbols.
+                                        Wrong new login.
                                     </div>
                                     <div class="valid-feedback valid-feedback-newLogin">
                                         Looks good! Login changed.
@@ -27,24 +27,36 @@
                             </div>
                             <div class="col-12 mb-3 mt-3">
                                 <h5 class="card-title">Your Email:
-                                    <b>
+                                    <b id="your_email">
                                         <?php echo $_SESSION['user_data']['email']?>
                                     </b>
                                 </h5>
                                 <div class="input-group mb-3">
-                                    <input type="text" class="form-control" placeholder="New email">
+                                    <input id="newEmail" type="email" class="form-control" placeholder="New email">
                                 </div>
-                                <a href="#" id="cangeEmail" class="btn btn-primary">Change Email</a>
+                                <div class="invalid-feedback invalid-feedback-newEmail">
+                                    Invalid email value. Should be example@mail.com
+                                </div>
+                                <div class="valid-feedback valid-feedback-newEmail">
+                                    Looks good! Email changed.
+                                </div>
+                                <a id="changeEmail" class="btn btn-primary text-light" onclick="return changeEmail()">Change Email</a>
                             </div>
                             <div class="col-12 mb-3 mt-3">
                                 <h5 class="card-title">Change Password:</h5>
                                 <div class="input-group mb-3">
-                                    <input type="text" class="form-control" id="currentPasswd" placeholder="Current password">
+                                    <input type="password" class="form-control" id="currentPasswd" placeholder="Current password">
                                 </div>
                                 <div class="input-group mb-3">
-                                    <input type="text" class="form-control" id="newPasswd" placeholder="New password">
+                                    <input type="password" class="form-control" id="newPasswd" placeholder="New password">
+                                    <div class="invalid-feedback invalid-feedback-newPass">
+                                        Invalid value. Check the values.
+                                    </div>
+                                    <div class="valid-feedback valid-feedback-newPass">
+                                        Looks good! Password changed.
+                                    </div>
                                 </div>
-                                <a id="cangeLogin" class="btn btn-primary">Change Password</a>
+                                <a id="cangePass" class="btn btn-primary text-light" onclick="return changePass()">Change Password</a>
                             </div>
                         </div>
                     </div>

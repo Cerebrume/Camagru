@@ -1,0 +1,33 @@
+[Info  - 09:53:35] Using tsserver from: /usr/share/code/resources/app/extensions/node_modules/typescript/lib
+[Info  - 09:53:35] Forking TSServer
+PATH: /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin 
+[Info  - 09:53:35] Started TSServer
+[Error  - 10:09:23] 'getApplicableRefactors' request failed with error.
+Error processing request. Debug Failure. Expected 3305 <= 3301
+Error: Debug Failure. Expected 3305 <= 3301
+    at Object.assertLessThanOrEqual (/usr/share/code/resources/app/extensions/node_modules/typescript/lib/tsserver.js:3809:17)
+    at Object.createFileDiagnostic (/usr/share/code/resources/app/extensions/node_modules/typescript/lib/tsserver.js:2677:19)
+    at getRangeToExtract (/usr/share/code/resources/app/extensions/node_modules/typescript/lib/tsserver.js:87150:42)
+    at Object.getAvailableActions (/usr/share/code/resources/app/extensions/node_modules/typescript/lib/tsserver.js:87036:38)
+    at /usr/share/code/resources/app/extensions/node_modules/typescript/lib/tsserver.js:83782:128
+    at getIterator (/usr/share/code/resources/app/extensions/node_modules/typescript/lib/tsserver.js:1838:23)
+    at Object.flatMapIterator (/usr/share/code/resources/app/extensions/node_modules/typescript/lib/tsserver.js:1821:27)
+    at Object.getApplicableRefactors (/usr/share/code/resources/app/extensions/node_modules/typescript/lib/tsserver.js:83781:36)
+    at Object.getApplicableRefactors (/usr/share/code/resources/app/extensions/node_modules/typescript/lib/tsserver.js:90896:32)
+    at IOSession.Session.getApplicableRefactors (/usr/share/code/resources/app/extensions/node_modules/typescript/lib/tsserver.js:97373:53)
+    at Session.handlers.ts.createMapFromTemplate._a.(anonymous function) (/usr/share/code/resources/app/extensions/node_modules/typescript/lib/tsserver.js:96268:61)
+    at /usr/share/code/resources/app/extensions/node_modules/typescript/lib/tsserver.js:97580:88
+    at IOSession.Session.executeWithRequestId (/usr/share/code/resources/app/extensions/node_modules/typescript/lib/tsserver.js:97571:28)
+    at IOSession.Session.executeCommand (/usr/share/code/resources/app/extensions/node_modules/typescript/lib/tsserver.js:97580:33)
+    at IOSession.Session.onMessage (/usr/share/code/resources/app/extensions/node_modules/typescript/lib/tsserver.js:97600:35)
+    at Interface.<anonymous> (/usr/share/code/resources/app/extensions/node_modules/typescript/lib/tsserver.js:98831:27)
+    at emitOne (events.js:96:13)
+    at Interface.emit (events.js:191:7)
+    at Interface._onLine (readline.js:241:10)
+    at Interface._normalWrite (readline.js:384:12)
+    at Socket.ondata (readline.js:101:10)
+    at emitOne (events.js:96:13)
+    at Socket.emit (events.js:191:7)
+    at readableAddChunk (_stream_readable.js:178:18)
+    at Socket.Readable.push (_stream_readable.js:136:10)
+    at Pipe.onread (net.js:560:20)

@@ -46,4 +46,14 @@ class Users extends Controller{
 		$viewmodel = new UserModel();
 		$this->returnView($viewmodel->changeLogin(), false);
 	}
+
+	protected function changeEmail() {
+		$viewmodel = new UserModel();
+		$this->returnView($viewmodel->changeEmail(), false);
+	}
+
+	protected function changePassword() {
+		$viewmodel = new UserModel();
+		$this->returnView($viewmodel->changePassword(), false);
+	}
 }

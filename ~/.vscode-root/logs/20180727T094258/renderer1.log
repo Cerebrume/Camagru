@@ -1,0 +1,5 @@
+[2018-07-27 17:54:25.875] [renderer1] [info] no standard startup: not a new window
+[2018-07-27 17:54:27.124] [renderer1] [info] No grammar found for scope source.smarty
+[2018-07-27 17:54:27.144] [renderer1] [info] No grammar found for scope languagebabel.ttlextension
+[2018-07-27 17:54:27.183] [renderer1] [info] No grammar found for scope text.html.javadoc
+[2018-07-27 17:54:34.632] [renderer1] [error] An unknown error occurred. Please consult the log for more details.

@@ -15,7 +15,6 @@ function sendComment(e) {
 	let comment = document.getElementById(selector).value;
 	let comment_elem = document.getElementById(selector);
 
-	console.log(id, comment);
 	if (comment.length <= 0) return;
 
 	const url = (document.URL + '/comment').replace(/([^:]\/)\/+/g, "$1");
@@ -44,7 +43,6 @@ function sendComment(e) {
 			if (shares[i].getAttribute('post-id') == id)
 				share_target = shares[i];
 		}
-		console.log(share_target);
 		var c_user = document.getElementsByClassName('profile__username')[0].innerText.toLowerCase();
 		c_user  = c_user[0].toUpperCase() + c_user.substring(1);
 		var c_desc = comment;

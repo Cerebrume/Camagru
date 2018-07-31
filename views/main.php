@@ -30,7 +30,7 @@
 					<div class="profile">
 						<a href="#" class="dropdown">
 							<svg class="profile_icon" xmlns="http://www.w3.org/2000/svg" viewBox="1529.79 22.454 13.331 13.306"><defs><style>.a{fill:#fff;}</style></defs><path class="a" d="M0,13.306V11.643c0-1.83,3-3.327,6.666-3.327s6.666,1.5,6.666,3.327v1.663ZM3.332,3.327A3.333,3.333,0,1,1,6.666,6.653,3.33,3.33,0,0,1,3.332,3.327Z" transform="translate(1529.79 22.454)"/></svg>
-							<span class="profile__username"><?php echo strtoupper($_SESSION['user_data']['login']); ?></span>
+							<span class="profile__username"><?php echo $_SESSION['user_data']['login']; ?></span>
 							<ul class="dropdown-menu">
 								<li class="dropdown-item"><a href="<?php echo ROOT_URL; ?>users/profile">Profile</a></li>
 								<li class="dropdown-item"><a href="<?php echo ROOT_URL; ?>posts/add">Share</a></li>
