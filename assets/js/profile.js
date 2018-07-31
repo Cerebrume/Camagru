@@ -203,7 +203,7 @@ function changePass() {
                 newPassword: newPassValue
             })
         })
-        .then(res => res.json())
+        .then(res => res.text())
         .then(passChangedSuccess)
         .catch(e => {
             console.log(e)

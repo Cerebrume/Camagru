@@ -216,10 +216,11 @@ class UserModel extends Model{
 				$isPasswordCorrect = password_verify($post['currentPassword'], $result['password']);
 				if ($result && $isPasswordCorrect) {
 					$passwd = password_hash($post['newPassword'], PASSWORD_BCRYPT);
-					$this->query('UPDATE users SET `password`=:newPassword WHERE `password`=:currentPassword');
+					$this->query('UPDATE users SET `password`=:newPassword WHERE `login`=:username');
 					$this->bind(":newPassword", $passwd);
-					$this->bind(":currentPassword", $post['currentPassword']);
-					$this->execute();
+					$this->bind(":username", $_SESSION['user_data']['login']);
+					$status = $this->single();
+					return $arrayName = array('result' => $result, "status" => $isPasswordCorrect, "pass" => $passwd);
 					return $arrayName = array('Changed' => true);
 				}
 			}
