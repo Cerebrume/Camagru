@@ -33,10 +33,11 @@ function sendComment(e) {
 		})
 	})
 	.then(res => res.text())
-	.then(addCommentToDom)
+	.then(res => console.log(res))
 	.catch(e => console.log(e))
+	addCommentToDom()
 
-	function addCommentToDom () {
+	function addCommentToDom (res) {
 		var shares = document.getElementsByClassName("share");
 		var share_target = null;
 		for (let i = 0; i < shares.length; i++) {

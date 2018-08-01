@@ -11,6 +11,7 @@
 			email VARCHAR(255),
 			password VARCHAR(128),
 			isActivated BOOLEAN NOT NULL,
+			isReceiveNotifications BOOLEAN DEFAULT true,
 			reg_date TIMESTAMP
 		);");
 		$db->exec($sql);

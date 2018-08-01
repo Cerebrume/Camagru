@@ -4,7 +4,7 @@ class PostModel extends Model{
 		if (!$_SESSION['is_logged_in']) {
 			header("Location: ". ROOT_URL);
 		}
-		$page = isset($_GET['id']) ? (int)$_GET['id'] : 0;
+		$page = isset($_GET['id']) !== 0 ? (int)$_GET['id'] : 0;
 		$per_page = 6;
 		$_GET['id'] = htmlentities($_GET['id']);
 		if(isset($_GET['id']) && is_numeric($_GET['id'])) {
@@ -12,9 +12,12 @@ class PostModel extends Model{
 		}
 		$page = $page * $per_page;
 		$offset = $page + $per_page;
-		$this->query("SELECT * FROM posts ORDER BY post_date DESC LIMIT $page,$offset");
+		$this->query("SELECT * FROM posts ORDER BY post_date DESC LIMIT $per_page OFFSET $offset");
 		$rows = $this->resultSet();
-		return $rows;
+		$this->query('SELECT COUNT(*) AS COUNT_POSTS FROM posts');
+		$num_pages = $this->single();
+		$pages = round($num_pages["COUNT_POSTS"] / $per_page, 0, PHP_ROUND_HALF_DOWN);
+		return array("posts" => $rows, "num_pages" => $pages, "page" => $page);
 	}
 
 	public function add() {
@@ -50,6 +53,57 @@ class PostModel extends Model{
 		return ;
 	}
 
+	public function notify($whatHappened, $comment_user, $comment_desc, $post_id) {
+		try {
+			$this->query('SELECT * FROM posts WHERE id=:post_id');
+			$this->bind(":post_id", $post_id);
+			$rows = $this->single();
+			$user = $rows['post_user'];
+			$this->query('SELECT * FROM users WHERE login=:username');
+			$this->bind(":username", $user);
+			$user_data = $this->single();
+			$user_email = $user_data['email'];
+			if (!$user_data['isReceiveNotifications']) {
+				return;
+			}
+			if ($comment_user === $user_data['login']) {
+				return;
+			}
+		} catch (PDOException $e) {
+			return $arrayName = array('Connection failed:' => $e->getMessage());
+		}
+		$encoding = "utf-8";
+		// Set preferences for Subject field
+		$subject_preferences = array(
+			"input-charset" => $encoding,
+			"output-charset" => $encoding,
+			"line-length" => 76,
+			"line-break-chars" => "\r\n"
+		);
+		$from_name = 'Camagru';
+		$from_mail = 'noreply@Camagru.com';
+		$mail_subject = iconv_mime_encode("Subject", "Notification", $subject_preferences);;
+		// Set mail header
+		$header = "Content-type: text/html; charset=".$encoding." \r\n";
+		$header .= "From: ".$from_name." <".$from_mail."> \r\n";
+		$header .= "MIME-Version: 1.0 \r\n";
+		$header .= "Content-Transfer-Encoding: 8bit \r\n";
+		$header .= "Date: ".date("r (T)")." \r\n";
+		$header .= iconv_mime_encode("Subject", $mail_subject, $subject_preferences);
+		$mail_message = '
+		<html>
+			<body>
+			<h1>'. $whatHappened . '</h1>
+			<p>'. $comment_user . ' said: ' . $comment_desc . '</p>';
+
+		$mail_message .= '</body></html>';
+		// Send mail
+		if (isset($user_email)) {
+			$mailSent = mail($user_email, $mail_subject, $mail_message, $header);
+		}
+		$arrayName = array('notify' => true, "mail_sent" => $mailSent, "user" => $user_data);
+	}
+
 	public function comment() {
 		
 		if ($_SESSION['is_logged_in']) {
@@ -60,7 +114,10 @@ class PostModel extends Model{
 				$this->bind(":user", $_SESSION['user_data']['login']);
 				$this->bind(":post_desc", $post['comment_desc']);
 				$this->bind(":id", $post['comment_post_id']);
-				$rows = $this->execute();
+				$added = $this->execute();
+				if ($added) {
+					$this->notify("Someone commented your post!", $_SESSION['user_data']['login'], $post['comment_desc'], $post['comment_post_id']);
+				}
 				return  $arrayName = array('Added' => true);
 			} catch (PDOException $e) {
 				return $arrayName = array('Connection failed:' => $e->getMessage());

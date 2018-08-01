@@ -1,7 +1,12 @@
 (function() {
-    const url = (document.URL + '/getcomments').replace(/([^:]\/)\/+/g, "$1");
     const shares = document.getElementsByClassName("share");
-
+    const baseUrl = document.URL;
+    function makeUrl(url, endpoint) {
+        let newUrl = url.split('/');
+    
+        return `http://${newUrl[2]}/${newUrl[3]}/${newUrl[4]}/${endpoint}`
+    }
+    const url = (makeUrl(baseUrl, 'getcomments'));
     fetch(url)
         .then(res => res.json())
         .then(addedCommentsToPosts)

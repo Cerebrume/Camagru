@@ -1,6 +1,11 @@
 (function() {
-    const url = (document.URL + '/getlikes').replace(/([^:]\/)\/+/g, "$1");
-
+    const baseUrl = document.URL;
+    function makeUrl(url, endpoint) {
+        let newUrl = url.split('/');
+    
+        return `http://${newUrl[2]}/${newUrl[3]}/${newUrl[4]}/${endpoint}`
+    }
+    const url = (makeUrl(baseUrl, 'getLikes'));
     fetch(url)
         .then(res => res.json())
         .then(addLikesToPosts)
