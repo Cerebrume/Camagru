@@ -27,7 +27,18 @@
             })
         })
         .then(res => res.text())
-        .then(res => console.log(res))
+        .then(deletePostInDom)
         .catch(e => console.log(e))
+        
+        function deletePostInDom() {
+            const posts = document.getElementsByClassName('share');
+            console.log(posts);
+            for (const post of posts) {
+                if (post.getAttribute('post-id') === postId) {
+                    post.remove();
+                    return;
+                }
+            }
+        }
     }
 })()

@@ -12,12 +12,13 @@ class PostModel extends Model{
 		}
 		$page = $page * $per_page;
 		$offset = $page + $per_page;
-		$this->query("SELECT * FROM posts ORDER BY post_date DESC LIMIT $per_page OFFSET $offset");
+		$this->query("SELECT * FROM posts ORDER BY id DESC LIMIT $offset OFFSET $page");
 		$rows = $this->resultSet();
 		$this->query('SELECT COUNT(*) AS COUNT_POSTS FROM posts');
 		$num_pages = $this->single();
 		$pages = round($num_pages["COUNT_POSTS"] / $per_page, 0, PHP_ROUND_HALF_DOWN);
-		return array("posts" => $rows, "num_pages" => $pages, "page" => $page);
+		
+		return array("posts" => $rows, "num_pages" => $pages, "page" => $page, 'offcet' => $offset);
 	}
 
 	public function add() {
