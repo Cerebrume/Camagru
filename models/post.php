@@ -21,9 +21,8 @@ class PostModel extends Model{
 	}
 
 	public function add() {
-
 		$post = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-		
+	
 		if ($_SESSION['is_logged_in']) {
 			
 			if (isset($post['submit_img'])) {				
@@ -42,14 +41,11 @@ class PostModel extends Model{
 					header('Location: '.ROOT_URL.'posts/');
 				}
 			}
-			
 		}
 		else {
 			header("Location: ". ROOT_URL);
 			return;
 		}
-		
-		
 		return ;
 	}
 
@@ -142,18 +138,18 @@ class PostModel extends Model{
 	public function like() {
 		if ($_SESSION['is_logged_in']) {
 			$post = json_decode(file_get_contents('php://input'), true);
-			if (!$post['submit_like']) return;
+			if (!$post['submit_like']) return array('Added' => false);
 			try {
 				$this->query('INSERT INTO likes (like_user, like_post_id) SELECT * FROM (SELECT :user, :post_id) AS tmp WHERE NOT EXISTS (SELECT like_user, like_post_id FROM likes WHERE like_user = :user and like_post_id = :post_id) LIMIT 1');
 				$this->bind(":user", $_SESSION['user_data']['login']);
 				$this->bind(":post_id", $post['post_id']);
 				$this->execute();
-				return $arrayName = array('Added' => true);
+				return array('Added' => true);
 			} catch (PDOException $e) {
 				echo 'Connection failed: ' . $e->getMessage();
 			}
-			return "liked";
 		}
+		return array('Added' => false);
 	}
 
 	public function getLikes() {
@@ -166,6 +162,23 @@ class PostModel extends Model{
 				echo 'Connection failed: ' . $e->getMessage();
 			}
 		}
-		
+		return array("Likes" => null);
+	}
+
+	public function deletePost() {
+		if ($_SESSION['is_logged_in']) {
+			$post = json_decode(file_get_contents('php://input'), true);
+			if (!$post['deletePost']) return array('Delete' => false);
+			try {
+				$this->query('DELETE FROM posts WHERE id=:post_id AND post_user=:username');
+				$this->bind(':post_id', $post['postId']);
+				$this->bind(':username', $_SESSION['user_data']['login']);
+				$deleted = $this->execute();
+				return array("Deleted" => true);
+			} catch (PDOException $e) {
+				echo 'Connection failed: ' . $e->getMessage();
+			}
+		}
+		return array("Deleted" => false);
 	}
 }

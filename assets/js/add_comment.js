@@ -16,8 +16,13 @@ function sendComment(e) {
 	let comment_elem = document.getElementById(selector);
 
 	if (comment.length <= 0) return;
-
-	const url = (document.URL + '/comment').replace(/([^:]\/)\/+/g, "$1");
+	const baseUrl = document.URL;
+    function makeUrl(url, endpoint) {
+        let newUrl = url.split('/');
+    
+        return `http://${newUrl[2]}/${newUrl[3]}/${newUrl[4]}/${endpoint}`
+    }
+    const url = (makeUrl(baseUrl, 'comment'));
 
 	fetch(url, {
 		method: 'POST',

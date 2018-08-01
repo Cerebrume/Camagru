@@ -10,8 +10,14 @@ for (let i = 0; i < likes.length; i++) {
 function like(e) {
     if (this.getAttribute('disabled')) return;
     
-	var post_id = this.getAttribute('post-id');
-    const url = (document.URL + '/like').replace(/([^:]\/)\/+/g, "$1");
+    var post_id = this.getAttribute('post-id');
+    const baseUrl = document.URL;
+    function makeUrl(url, endpoint) {
+        let newUrl = url.split('/');
+    
+        return `http://${newUrl[2]}/${newUrl[3]}/${newUrl[4]}/${endpoint}`
+    }
+    const url = (makeUrl(baseUrl, 'like'));
     
     fetch(url, {
 		method: 'POST',
@@ -26,15 +32,15 @@ function like(e) {
 		})
 	})
 	.then(res => res.text())
-	.then(addLikeToDom)
+	.then(res => console.log(res))
     .catch(e => console.log(e))
-    
-
+    addLikeToDom();
+    this.setAttribute('disabled', true);
+    this.classList.add('liked');
     function addLikeToDom() {
         const likes_count = document.getElementsByClassName('likes_count');
 
         let currentLikes = null;
-       
         for(let i = 0; i < likes_count.length; i++) {
             if (likes_count[i].getAttribute('post-id') === post_id) {
                 currentLikes = likes_count[i];

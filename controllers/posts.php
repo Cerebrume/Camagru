@@ -29,4 +29,9 @@
 			$vievmodel = new PostModel();
 			$this->returnView($vievmodel->getLikes(), false);
 		}
+
+		protected function deletePost() {
+			$vievmodel = new PostModel();
+			$this->returnView($vievmodel->deletePost(), false);
+		}
 	}

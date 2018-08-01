@@ -12,7 +12,7 @@
         .catch(e => console.log(e));
 
     function addLikesToPosts (likes) {
-        let user = document.getElementsByClassName('profile__username')[0].innerText.toLowerCase();
+        let user = document.getElementsByClassName('profile__username')[0].innerText;
         
         let likes_count = document.getElementsByClassName('likes_count');
         let number_likes = 0;
@@ -24,7 +24,7 @@
                 if (postId == likes[j]['like_post_id']) {
                     number_likes++;
                 }
-                if (user == likes[j]['like_user'].toLowerCase() && (postId == likes[j]['like_post_id'])) {
+                if (user == likes[j]['like_user'] && (postId == likes[j]['like_post_id'])) {
                     let liked = document.querySelector('.like[post-id="'+ postId + '"]');
                     liked.setAttribute('disabled', true);
                     liked.classList.add('liked');
