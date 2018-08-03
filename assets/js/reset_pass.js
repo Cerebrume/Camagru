@@ -25,13 +25,13 @@ form.addEventListener('submit', resetPasswordRequest)
 
 function resetPasswordRequest(e) {
     
-    if (valid_email()) {
-        console.log('valid')
-    } else {
+    if (!valid_email()) {
         e.preventDefault();
         errorMessage.style.display = 'block';
         setTimeout(function () {
             errorMessage.style.display = 'none';
         }, 2000);
+    } else {
+        console.log('valid')
     }
 }
