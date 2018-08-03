@@ -31,6 +31,8 @@ password.addEventListener('focus', () => {
 	password.classList.remove('bg-danger');
 });
 
+register_btn.addEventListener('click', submition);
+
 register_btn.style.display = 'block';
 function valid_login() {
 	var value = login.value;
