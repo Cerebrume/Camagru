@@ -13,14 +13,14 @@ class UserModel extends Model{
 		);
 		$from_name = 'Camagru';
 		$from_mail = 'noreply@Camagru.com';
-		$mail_subject = iconv_mime_encode("Subject", "Verif your acc", $subject_preferences);;
+		$mail_subject = iconv_mime_encode("Subject", "Verify your acc", $subject_preferences);
 		// Set mail header
 		$header = "Content-type: text/html; charset=".$encoding." \r\n";
 		$header .= "From: ".$from_name." <".$from_mail."> \r\n";
 		$header .= "MIME-Version: 1.0 \r\n";
 		$header .= "Content-Transfer-Encoding: 8bit \r\n";
 		$header .= "Date: ".date("r (T)")." \r\n";
-		$header .= iconv_mime_encode("Subject", $mail_subject, $subject_preferences);
+		$header .= iconv_mime_encode("Subject", $mail_subject);
 
 		$bytes = openssl_random_pseudo_bytes(32);
 		$hash = bin2hex($bytes);// password_hash($mail . $login, PASSWORD_BCRYPT);
