@@ -116,7 +116,8 @@ class UserModel extends Model{
 				$_SESSION['user_data'] = array(
 					"id"	=> $result['id'],
 					"login"	=> $result['login'],
-					"email"	=> $result['email']
+					"email"	=> $result['email'],
+					"notif" => $result['isReceiveNotifications']
 				);
 				header('Location: '.ROOT_URL.'posts');
 			} else {
@@ -158,6 +159,9 @@ class UserModel extends Model{
 	}
 
 	public function changeLogin() {
+		if (!isset($_SESSION['is_logged_in'])) {
+			header("Location: ". ROOT_URL. "users");
+		}
 		$post = json_decode(file_get_contents('php://input'), true);
 		if (isset($post['newLogin']) && isset($post['changeLogin'])) {
 			try {
@@ -186,6 +190,9 @@ class UserModel extends Model{
 	}
 
 	public function changeEmail() {
+		if (!isset($_SESSION['is_logged_in'])) {
+			header("Location: ". ROOT_URL. "users");
+		}
 		$post = json_decode(file_get_contents('php://input'), true);
 		if (isset($post['newEmail']) && isset($post['changeEmail'])) {
 			try {
@@ -205,6 +212,9 @@ class UserModel extends Model{
 	}
 
 	public function changePassword() {
+		if (!isset($_SESSION['is_logged_in'])) {
+			header("Location: ". ROOT_URL. "users");
+		}
 		$post = json_decode(file_get_contents('php://input'), true);
 		if (isset($post['changePassword'])
 			&& isset($post['currentPassword'])
@@ -233,6 +243,29 @@ class UserModel extends Model{
 			}
 		}
 		return $arrayName = array('Changed' => false);
+	}
+
+	public function changeNotif() {
+		if (!isset($_SESSION['is_logged_in'])) {
+			header("Location: ". ROOT_URL. "users");
+		}
+
+		$post = json_decode(file_get_contents('php://input'), true);
+		if (isset($post['changeNotif']) && isset($post['value'])) {
+			try {
+				$value = $post['value'] === true ? '1' : '0';
+				$this->query('UPDATE users SET isReceiveNotifications=:notifVal WHERE id=:id');
+				$this->bind(":notifVal", $value);
+				$this->bind(":id", $_SESSION['user_data']['id']);
+				$res = $this->execute();
+				$_SESSION['user_data']['notif'] = $post['value'];
+				return $arrayName = array('Changed' => true, "ses" => $_SESSION);
+			}
+			catch (PDOException $e) {
+				echo 'Connection failed: ' . $e->getMessage();
+				return $arrayName = array('Changed' => false);
+			}
+		}
 	}
 
 	public function profile() {

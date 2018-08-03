@@ -225,3 +225,65 @@ function passChangedSuccess (res) {
         currentPassInput.value = '';
     }
 }
+
+/*
+** End of change password
+*/
+
+
+
+const checkBox = document.getElementById('notificaton');
+const notifBtn = document.getElementById('cangeNotification');
+const errorMessageNotif = document.querySelector('.invalid-feedback-notif');
+const validMessageNotif = document.querySelector('.valid-feedback-notif');
+let notifInProgress = false;
+
+notifBtn.addEventListener('click', changeNotifSettings);
+
+
+function changeNotifSettings (e) {
+    console.log(checkBox.checked)
+    const baseUrl = document.URL
+    const url = makeUrl(baseUrl, 'changeNotif');
+
+    console.log(errorMessageNotif, validMessageNotif)
+    if (notifInProgress === false) {
+        notifInProgress = true
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json, application/xml, text/plain, text/html, *.*',
+                'Content-Type': 'application/text'
+            },
+            mode: 'cors',
+            body: JSON.stringify({
+                changeNotif: true,
+                value: checkBox.checked,
+            })
+        })
+        .then(res => res.json())
+        .then(showSuccess)
+        .catch(e => {
+            console.log(e)
+            notifInProgress = false
+
+            errorMessageNotif.style.display = 'block';
+            setTimeout(function () {
+                errorMessageNotif.style.display = 'none';
+            }, 2000)
+        })
+    }
+    else {
+        e.preventDefault();
+    }
+
+    function showSuccess(res) {
+        console.log(res)
+        validMessageNotif.style.display = 'block';
+        setTimeout(function () {
+            validMessageNotif.style.display = 'none';
+        }, 2000)
+        notifInProgress = false;
+    }
+
+}

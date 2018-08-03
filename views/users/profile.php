@@ -58,6 +58,20 @@
                                 </div>
                                 <a id="cangePass" class="btn btn-primary text-light" onclick="return changePass()">Change Password</a>
                             </div>
+                            <div class="col-12 mb-3 mt-3">
+                                <h5 class="card-title">Change Notification Settings:</h5>
+                                <div class="input-group mb-3 d-flex justify-content-center">
+                                    <input type="checkbox" id="notificaton" value="notifications" <?php echo $_SESSION['user_data']['notif'] ? 'checked' : '' ?>>
+                                    <label>Enable notifications</label>
+                                    <div class="invalid-feedback invalid-feedback-notif">
+                                        Error during changing notification settings
+                                    </div>
+                                    <div class="valid-feedback valid-feedback-notif">
+                                        Looks good! Notification settings changed.
+                                    </div>
+                                </div>
+                                <a id="cangeNotification" class="btn btn-primary text-light" >Change Notifications</a>
+                            </div>
                         </div>
                     </div>
                 </div>
