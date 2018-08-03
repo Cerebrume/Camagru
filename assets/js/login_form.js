@@ -37,12 +37,12 @@ function valid_email() {
 
 	if (value === "" || mail_valid.test(value.toLowerCase()) != true || value.length > 28) {
 		email.classList.add('bg-danger');
-		passwdErrorMessage.style.display = "block";
+		emailErrorMessage.style.display = "block";
 		return false;
 	}
 	else if (value !== "" && mail_valid.test(value.toLowerCase())) {
 		email.classList.remove('bg-danger');
-		passwdErrorMessage.style.display = "none";
+		emailErrorMessage.style.display = "none";
 		return true;
 	}
 }

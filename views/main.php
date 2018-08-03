@@ -34,7 +34,6 @@
 							<ul class="dropdown-menu">
 								<li class="dropdown-item"><a href="<?php echo ROOT_URL; ?>users/profile">Profile</a></li>
 								<li class="dropdown-item"><a href="<?php echo ROOT_URL; ?>posts/add">Share</a></li>
-								<li class="dropdown-item"><a href="#">Settings</a></li>
 								<li class="dropdown-item"><a href="<?php echo ROOT_URL; ?>users/logout">Logout</a></li>
 								
 							</ul>

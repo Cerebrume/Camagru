@@ -10,7 +10,7 @@
 			login VARCHAR(255) NOT NULL,
 			email VARCHAR(255),
 			password VARCHAR(128),
-			isActivated BOOLEAN NOT NULL,
+			isActivated BOOLEAN NOT NULL DEFAULT false,
 			isReceiveNotifications BOOLEAN DEFAULT true,
 			reg_date TIMESTAMP
 		);");

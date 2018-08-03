@@ -1,4 +1,5 @@
 <?php
+	require_once('Classes/Messages.php');
 class UserModel extends Model{
 	public function sendVerifMail($email, $login) {
 		$encoding = "utf-8";
@@ -264,6 +265,34 @@ class UserModel extends Model{
 			catch (PDOException $e) {
 				echo 'Connection failed: ' . $e->getMessage();
 				return $arrayName = array('Changed' => false);
+			}
+		}
+	}
+
+	public function forgotPass() {
+		if (isset($_SESSION['is_logged_in'])) {
+			header("Location: ". ROOT_URL. "users");
+		}
+		$post = json_decode(file_get_contents('php://input'), true);
+		if (isset($post['forgotPassword']) && isset($post['email'])) {
+			try {
+				$this->query('SELECT * FROM users WHERE `email`=:email');
+				$this->bind(":email", $post['email']);
+				$res = $this->single();
+				if ($res['email']) {
+					Messages::setMessage('Email sent', '');
+					// return array('email' => $post['email'], 'res' => $res);
+				} else {
+					Messages::setMessage('No such user found', 'error');
+					header("Location: ". ROOT_URL. "users/forgotPass");
+					// return $arrayName = array('Changed' => false);	
+				}
+			}
+			catch (PDOException $e) {
+				echo 'Connection failed: ' . $e->getMessage();
+				Messages::setMessage('No such user found', 'error');
+				header("Location: ". ROOT_URL. "users/forgotPass");
+				// return $arrayName = array('Changed' => false);
 			}
 		}
 	}
