@@ -30,13 +30,14 @@
 
     
     function snapshot() {
+        console.log(currentPic, localMediaStream, uploadedImg.src)
         if (!currentPic) return
-        if (localMediaStream || uploadedImg) {
+        if (localMediaStream || uploadedImg.src) {
             modal.style.display = 'block';
             modal.classList.add('show');
             modal.style.backgroundColor = 'rgba(0, 0, 0, 0.9)';
             //create_preview();
-        }
+        } else return;
     }
     
 /*
@@ -81,8 +82,6 @@ function handleMouseDown(e){
 
         var dx = mouseX - defaultPosX;
         var dy = mouseY - defaultPosY;
-        console.log(dx, dy, mouseX, mouseY);
-        console.log('Default ', defaultPosX, defaultPosY)
         if (isDragging) {
             defaultPosX += dx;
             defaultPosY += dy;
