@@ -1,54 +1,95 @@
 (function(){
     const canvas = document.getElementById('canvas');
     let ctx = canvas.getContext('2d');
-    const offsetX=canvas.offsetLeft;
-    const offsetY=canvas.offsetTop;
+    var BB=canvas.getBoundingClientRect();
+    var offsetX=BB.left;
+    var offsetY=BB.top;
     let isDragging = false;
     const canvasWidth = canvas.width;
     const canvasHeight = canvas.height;
-    let currentX = 0;
-    let currentY = 0;
     canvas.onselectstart = () => false;
+    let localMediaStream = null;
+    const video = document.getElementById('video');
+    let defaultPosX = 240 - 75;
+    let defaultPosY = 240 - 75;
+    const snapBtn = document.getElementById('snap');
+    const modal = document.getElementById('exampleModal')
+
+    snapBtn.addEventListener('click', snapshot);
+    video.addEventListener('play', draw, false);
+
+    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+        navigator.mediaDevices
+        .getUserMedia({video: true})
+        .then(function(stream){
+            video.srcObject = stream;
+            video.play();
+            localMediaStream = stream;
+        }).catch(e => console.log(e))
+    }
+
+    
+    function snapshot() {
+        if (!currentPic) return
+        if (localMediaStream || uploadedImg) {
+            modal.style.display = 'block';
+            modal.classList.add('show');
+            modal.style.backgroundColor = 'rgba(0, 0, 0, 0.9)';
+            //create_preview();
+        }
+    }
     
 /*
 ** Canvas mouse handlers
 */
 
 function handleMouseDown(e){
+    e.preventDefault();
+    e.stopPropagation();
 	var mouseX = parseInt(e.clientX - offsetX);
 	var mouseY = parseInt(e.clientY - offsetY);
     // set the drag flag
-	if (mouseX && mouseY) {
-        currentX = mouseX;
-        currentY = mouseY;
+    isDragging = false;
+    if (mouseX > defaultPosX - 150 && mouseX < defaultPosX + 150 
+        && mouseY > defaultPosY - 150 && mouseY < defaultPosY + 150) {
         isDragging = true;
+    
     }
+    defaultPosX = mouseX;
+    defaultPosY = mouseY;
+
   }
 
   function handleMouseUp(e){
-	var mouseX = parseInt(e.clientX - offsetX);
-	var mouseY = parseInt(e.clientY - offsetY);
-    // clear the drag flag
-    currentX = mouseX;
-    currentY = mouseY;
+    e.preventDefault();
+    e.stopPropagation();
 	isDragging=false;
-
   }
 
   function handleMouseOut(e){
-
+    e.preventDefault();
+    e.stopPropagation();
 	// user has left the canvas, so clear the drag flag
 	isDragging=false;
   }
 
   function handleMouseMove(e){
-	  
-	if (isDragging) {
-		currentX=parseInt(e.clientX-offsetX);
-        currentY=parseInt(e.clientY-offsetY);
-        
-	}
-	
+    e.preventDefault();
+    e.stopPropagation();
+        var mouseX = parseInt(e.clientX - offsetX);
+        var mouseY = parseInt(e.clientY - offsetY);
+
+        var dx = mouseX - defaultPosX;
+        var dy = mouseY - defaultPosY;
+        console.log(dx, dy, mouseX, mouseY);
+        console.log('Default ', defaultPosX, defaultPosY)
+        if (isDragging) {
+            defaultPosX += dx;
+            defaultPosY += dy;
+            defaultPosX = mouseX;
+            defaultPosY = mouseY;
+    
+        }
 	// if the drag flag is set, clear the canvas and draw the image
 
   }
@@ -95,24 +136,27 @@ canvas.addEventListener('mouseout', handleMouseOut, false);
     function createImage() {
         
         uploadedImg.onload = function() {
+            ctx.clearRect(0,0,canvas.width,canvas.height);
+
             ctx.drawImage(uploadedImg, 0, 0, canvasWidth, canvasHeight);
         }
         uploadedImg.src = fr.result;
     }
 
     function draw() {
+        ctx.clearRect(0,0,canvas.width,canvas.height);
+        if (localMediaStream) {
+            ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+        }
         if(uploadedImg) {
             ctx.drawImage(uploadedImg, 0, 0, canvasWidth, canvasHeight);
         }
-        if (currentPic && currentX && currentY) {
-		    ctx.drawImage(currentPic, currentX - 300 / 2, currentY - 200 / 2, 150, 150);
-        } else if (currentPic){
-		    ctx.drawImage(currentPic, 480 / 2 - 75, 360 / 2 - 75, 150, 150);
+        if (currentPic){
+		    ctx.drawImage(currentPic, defaultPosX, defaultPosY, 150, 150);
         }
     }
 
     setInterval(function() {
-        ctx.clearRect(0,0,canvas.width,canvas.height);
         draw();
       }, 10);
 

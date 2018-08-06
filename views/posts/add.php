@@ -3,8 +3,8 @@
 	<div class="row justify-content-center">
 		<div class="col-5">
 			<div class="camera-canvas">
-				<video id="video" width="480" height="360" autoplay></video>
-				<canvas id="canvas" width="480" height="360"></canvas>
+				<video id="video" width="480" height="480" autoplay></video>
+				<canvas id="canvas" width="480" height="480"></canvas>
 				<div class="camera-images container-fluid">
 					<div class="row">
 						<div class="col-2">
@@ -33,10 +33,24 @@
 	</div>
 </div>
 
-<div id="preview-bg" class="preview-bg">
-	<div id="preview-bg__container" class="preview-bg__container">
-	</div>
-
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        .asdasdasdasd
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
 </div>
 
 <!-- <script src="<?php echo ROOT_URL; ?>assets/js/app.js"></script> -->
