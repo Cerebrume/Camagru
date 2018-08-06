@@ -14,6 +14,11 @@
     let defaultPosY = 240 - 75;
     const snapBtn = document.getElementById('snap');
     const modal = document.getElementById('exampleModal')
+    const closeBtnX = document.querySelector('.close');
+    const closeBtn = document.querySelector('.closeBtn');
+
+    closeBtnX.addEventListener('click', closeModal)
+    closeBtn.addEventListener('click', closeModal)
 
     snapBtn.addEventListener('click', snapshot);
     video.addEventListener('play', draw, false);
@@ -28,7 +33,14 @@
         }).catch(e => console.log(e))
     }
 
-    
+    function closeModal () {
+        modal.style.display = 'none';
+        modal.classList.remove('show');
+        modal.style.backgroundColor = '';
+
+    }
+
+
     function snapshot() {
         console.log(currentPic, localMediaStream, uploadedImg.src)
         if (!currentPic) return
@@ -36,8 +48,12 @@
             modal.style.display = 'block';
             modal.classList.add('show');
             modal.style.backgroundColor = 'rgba(0, 0, 0, 0.9)';
-            //create_preview();
+            create_preview();
         } else return;
+    }
+
+    function create_preview() {
+        
     }
     
 /*
