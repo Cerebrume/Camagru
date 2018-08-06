@@ -374,7 +374,8 @@ class UserModel extends Model{
 			try {
 				$this->query('UPDATE users SET password=:passwd WHERE email=:email');
 				$this->bind(':email', $_SESSION['resetEmail']);
-				$this->bind(':passwd', $post['newPass']);
+				$passwd = password_hash($post['newPass'], PASSWORD_BCRYPT);
+				$this->bind(':passwd', 	$passwd);
 				$isOk = $this->execute();
 				$_SESSION['resetEmail'] = '';
 				if ($isOk) {
@@ -388,6 +389,6 @@ class UserModel extends Model{
 				return $arrayName = array('Error' => $e->getMessage());
 			}
 		}
-		return array('Changed' => false, 'ses' => $_SESSION);
+		return array('Changed' => false);
 	}
 }
