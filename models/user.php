@@ -137,9 +137,11 @@ class UserModel extends Model{
 				$this->execute();
 				$result = $this->single();
 				if ($result) {
-
 					$this->query('UPDATE users SET isActivated=1 WHERE `login`=:username');
 					$this->bind(":username", $result['login_user']);
+					$this->execute();
+					$this->query('DELETE FROM verification WHERE `verificationCode`=:id');
+					$this->bind(":id", $get['id']);
 					$this->execute();
 					Messages::setMessage("Email verification completed", "success");
 					header("Location: ". ROOT_URL. "users/login");
@@ -227,13 +229,9 @@ class UserModel extends Model{
 				$isPasswordCorrect = password_verify($post['currentPassword'], $result['password']);
 				if ($result && $isPasswordCorrect) {
 					$passwd = password_hash($post['newPassword'], PASSWORD_BCRYPT);
-					/* $this->query('UPDATE users SET `password`=:newPassword WHERE `login`=:username');
+					$this->query('UPDATE users SET password=:newPassword WHERE id=:userid');
 					$this->bind(":newPassword", $passwd);
-					$this->bind(":username", $_SESSION['user_data']['login']); */
-					$this->query('UPDATE users SET password=:newPassword WHERE id=:username');
-					$this->bind(":newPassword", $passwd);
-					$this->bind(":username", $result['id']);
-
+					$this->bind(":userid", $result['id']);
 					$this->execute();
 					return $arrayName = array('Changed' => true);
 				}
@@ -273,28 +271,7 @@ class UserModel extends Model{
 		if (isset($_SESSION['is_logged_in'])) {
 			header("Location: ". ROOT_URL. "users");
 		}
-		$post = json_decode(file_get_contents('php://input'), true);
-		if (isset($post['forgotPassword']) && isset($post['email'])) {
-			try {
-				$this->query('SELECT * FROM users WHERE `email`=:email');
-				$this->bind(":email", $post['email']);
-				$res = $this->single();
-				if ($res['email']) {
-					Messages::setMessage('Email sent', '');
-					// return array('email' => $post['email'], 'res' => $res);
-				} else {
-					Messages::setMessage('No such user found', 'error');
-					header("Location: ". ROOT_URL. "users/forgotPass");
-					// return $arrayName = array('Changed' => false);	
-				}
-			}
-			catch (PDOException $e) {
-				echo 'Connection failed: ' . $e->getMessage();
-				Messages::setMessage('No such user found', 'error');
-				header("Location: ". ROOT_URL. "users/forgotPass");
-				// return $arrayName = array('Changed' => false);
-			}
-		}
+		return;
 	}
 
 	public function profile() {
@@ -305,5 +282,68 @@ class UserModel extends Model{
 		$this->bind(':username', $_SESSION['user_data']['login']);
 		$result = $this->single();
 		
+	}
+
+	public function sendResetPassMail($email) {
+		$encoding = "utf-8";
+
+		// Set preferences for Subject field
+		$subject_preferences = array(
+			"input-charset" => $encoding,
+			"output-charset" => $encoding,
+			"line-length" => 76,
+			"line-break-chars" => "\r\n"
+		);
+		$from_name = 'Camagru';
+		$from_mail = 'noreply@Camagru.com';
+		$mail_subject = iconv_mime_encode("Subject", "Reset Pasword", $subject_preferences);;
+		// Set mail header
+		$header = "Content-type: text/html; charset=".$encoding." \r\n";
+		$header .= "From: ".$from_name." <".$from_mail."> \r\n";
+		$header .= "MIME-Version: 1.0 \r\n";
+		$header .= "Content-Transfer-Encoding: 8bit \r\n";
+		$header .= "Date: ".date("r (T)")." \r\n";
+		$header .= iconv_mime_encode("Subject", $mail_subject, $subject_preferences);
+
+		$bytes = openssl_random_pseudo_bytes(32);
+		$hash = bin2hex($bytes);// password_hash($mail . $login, PASSWORD_BCRYPT);
+		$mail_message = '
+		<html>
+			<body>
+			<h1>To reset your password follow the instructions</h1>
+		Please click this link to reset your password: ';
+		$mail_message .= 'http://localhost' . ROOT_URL . 'users/resetPass/'.$hash;
+		$mail_message .= '</body></html>';
+		try {
+			$this->query('UPDATE users SET resetPassHash=:hash WHERE email=:usermail');
+			$this->bind(":usermail", $email);
+			$this->bind(":hash", $hash);
+			$this->execute();
+		}
+		catch (PDOException $e) {
+			echo 'Connection failed: ' . $e->getMessage();
+		}
+		// Send mail	
+		$mailSent = mail($email, $mail_subject, $mail_message, $header);
+	}
+
+	public function resetPassRequest() {
+		$post = json_decode(file_get_contents('php://input'), true);
+		if (isset($post['email']) && isset($post['resetPass'])) {
+			$this->query('SELECT * FROM users WHERE email=:email');
+			$this->bind(':email', $post['email']);
+			$isExist = $this->execute();
+			if ($isExist) {
+				$this->sendResetPassMail($post['email']);
+			}
+			return array('Sent' => true);
+		}
+	}
+
+	public function resetPass() {
+		$get = filter_input_array(INPUT_GET, FILTER_SANITIZE_STRING);
+		if (isset($get['id'])) {
+			
+		}
 	}
 }

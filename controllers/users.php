@@ -66,4 +66,14 @@ class Users extends Controller{
 		$viewmodel = new UserModel();
 		$this->returnView($viewmodel->forgotPass(), true);
 	}
+
+	protected function resetPassRequest() {
+		$viewmodel = new UserModel();
+		$this->returnView($viewmodel->resetPassRequest(), false);
+	}
+
+	protected function resetPass() {
+		$viewmodel = new UserModel();
+		$this->returnView($viewmodel->resetPass(), true);
+	}
 }

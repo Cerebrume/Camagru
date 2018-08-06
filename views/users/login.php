@@ -7,7 +7,7 @@
 			<form id="form-login" name="register" action="<?php //echo $_SERVER['PHP_SELF']; ?>" method="post">
 			<div class="input-group input-group-lg">
 				<div class="input-group-prepend">
-					<div class="input-group-text"><img class="input-prepend" src="/Camagru/assets/img/mail-icon.png" alt=""></div>
+					<div class="input-group-text"><img class="input-prepend" src="<?php echo ROOT_URL. "/assets/img/mail-icon.png" ?>" alt=""></div>
 				</div>
 				<input class="form-control" type="email" name="email"  id="email" placeholder="sophie@example.com">
 				<div class="invalid-feedback invalid-feedback-email">
@@ -16,7 +16,7 @@
 			</div>
 			<div class="input-group input-group-lg">
 				<div class="input-group-prepend">
-					<div class="input-group-text"><img class="input-prepend" src="/Camagru/assets/img/lock-icon.png" alt="lock"></div>
+					<div class="input-group-text"><img class="input-prepend" src="<?php echo ROOT_URL. "/assets/img/lock-icon.png" ?>" alt="lock"></div>
 				</div>
 				<input class="form-control" type="password" name="password"  id="passwd" placeholder="Password">
 				<div class="invalid-feedback invalid-feedback-password">

@@ -12,6 +12,7 @@
 			password VARCHAR(128),
 			isActivated BOOLEAN NOT NULL DEFAULT false,
 			isReceiveNotifications BOOLEAN DEFAULT true,
+			resetPassHash VARCHAR(255),
 			reg_date TIMESTAMP
 		);");
 		$db->exec($sql);
