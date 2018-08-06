@@ -38,6 +38,8 @@ function resetPasswordRequest(e) {
 		const url = (makeUrl(baseUrl, 'resetPassRequest'));
 		console.log(url)
 		fetchInProgress = true;
+		errorMessage.style.display = 'none';
+		btnReset.setAttribute('value', 'Request in progress');
 		fetch(url, {
             method: 'POST',
             headers: {
@@ -50,11 +52,12 @@ function resetPasswordRequest(e) {
                 email: email.value
             })
         })
-		.then(res => res.text())
+		.then(res => res.json())
 		.then(addSuccessMessage)
 		.catch(e => {
 			console.log(e)
 			fetchInProgress = false;
+			btnReset.setAttribute('value', 'Reset');
 		});
 	
 	} else if (fetchInProgress) {
@@ -63,9 +66,10 @@ function resetPasswordRequest(e) {
 		console.log('invalid')
 		errorMessage.style.display = 'block';
 		successMessage.style.display = 'none';
+		btnReset.setAttribute('value', 'Reset');
         setTimeout(function () {
             errorMessage.style.display = 'none';
-        }, 2000);
+        }, 5000);
 
 	}
 	
@@ -74,9 +78,7 @@ function resetPasswordRequest(e) {
 function addSuccessMessage (res) {
 	console.log(res)
 	successMessage.style.display = 'block';
+	btnReset.setAttribute('value', 'Reset');
 	email.value = '';
 	fetchInProgress = false;
-	setTimeout(function () {
-		successMessage.style.display = 'none';
-	}, 2000);
 }

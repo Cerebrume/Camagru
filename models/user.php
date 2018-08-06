@@ -330,11 +330,17 @@ class UserModel extends Model{
 	public function resetPassRequest() {
 		$post = json_decode(file_get_contents('php://input'), true);
 		if (isset($post['email']) && isset($post['resetPass'])) {
-			$this->query('SELECT * FROM users WHERE email=:email');
-			$this->bind(':email', $post['email']);
-			$isExist = $this->execute();
-			if ($isExist) {
-				$this->sendResetPassMail($post['email']);
+			try {
+				$this->query('SELECT * FROM users WHERE email=:email');
+				$this->bind(':email', $post['email']);
+				$isExist = $this->execute();
+				if ($isExist) {
+					$this->sendResetPassMail($post['email']);
+					$_SESSION['resetEmail'] = $post['email'];
+				}
+			} 
+			catch (PDOException $e) {
+				return $arrayName = array('Error' => $e->getMessage());
 			}
 			return array('Sent' => true);
 		}
@@ -343,7 +349,45 @@ class UserModel extends Model{
 	public function resetPass() {
 		$get = filter_input_array(INPUT_GET, FILTER_SANITIZE_STRING);
 		if (isset($get['id'])) {
-			
+			try {
+				$this->query('SELECT * FROM users WHERE resetPassHash=:resetHash');
+				$this->bind(':resetHash', $get['id']);
+				$isExist = $this->single();
+				if ($isExist) {
+					/* $this->query('UPDATE users SET resetPassHash=NULL WHERE resetPassHash=:resetHash');
+					$this->bind(':resetHash', $get['id']);
+					$this->execute(); */
+					return;
+				} else {
+					header("Location: ". ROOT_URL. "users");
+				}
+			}
+			catch (PDOException $e) {
+				return $arrayName = array('Error' => $e->getMessage());
+			}
 		}
+	}
+
+	public function restorePass() {
+		$post = json_decode(file_get_contents('php://input'), true);
+		if (isset($post['changePass']) && isset($post['newPass']) && isset($_SESSION['resetEmail'])) {
+			try {
+				$this->query('UPDATE users SET password=:passwd WHERE email=:email');
+				$this->bind(':email', $_SESSION['resetEmail']);
+				$this->bind(':passwd', $post['newPass']);
+				$isOk = $this->execute();
+				$_SESSION['resetEmail'] = '';
+				if ($isOk) {
+					Messages::setMessage("Password changed!", "success");
+					return array('Changed' => true);
+				}
+				return array('Changed' => false, 'isOk' => $isOk);
+
+			}
+			catch (PDOException $e) {
+				return $arrayName = array('Error' => $e->getMessage());
+			}
+		}
+		return array('Changed' => false, 'ses' => $_SESSION);
 	}
 }
