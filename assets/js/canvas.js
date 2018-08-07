@@ -115,7 +115,7 @@ function handleMouseDown(e){
 
     }
 	// if the drag flag is set, clear the canvas and draw the image
-    ctx.lineTo(mouseX, mouseY);
+    ctx.lineTo(startX, startY);
     ctx.stroke()
   }
 
@@ -180,7 +180,7 @@ canvas.addEventListener('mouseout', handleMouseOut, false);
         if (currentPic){
 		    ctx.drawImage(currentPic, defaultPosX, defaultPosY, stickerWidth, stickerHeight);
         }
-
+        ctx.fillRect(defaultPosX,defaultPosY,stickerWidth,stickerHeight);
     }
 
     setInterval(function() {
