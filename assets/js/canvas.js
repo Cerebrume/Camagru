@@ -31,7 +31,7 @@
 
 
 removeImgBtn.addEventListener('click', function() {
-    if (uploadedImg) uploadedImg = null;
+    if (uploadedImg) uploadedImg.src = '';
 })
     shareBrn.addEventListener('click', sendShare)
     closeBtnX.addEventListener('click', closeModal)
@@ -199,7 +199,7 @@ canvas.addEventListener('mouseout', handleMouseOut, false);
         if (localMediaStream) {
             ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
         } 
-        if(uploadedImg) {
+        if(uploadedImg && uploadedImg.src) {
             ctx.drawImage(uploadedImg, 0, 0, canvasWidth, canvasHeight);
         }
         if (currentPic){
