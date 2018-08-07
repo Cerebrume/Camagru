@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container-fluid">
     <div class="row justify-content-center">
         <div class="col-8">
             <div class="card text-center">
@@ -6,7 +6,7 @@
                     User profile info
                 </div>
                 <div class="card-body">
-                    <div class="container">
+                    <div class="container-fluid">
                         <div class="row">
                             <div class="col-12 mb-3 mt-3">
                                 <h5 class="card-title">Your login:

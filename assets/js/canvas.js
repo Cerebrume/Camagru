@@ -1,17 +1,22 @@
 (function(){
     const canvas = document.getElementById('canvas');
     let ctx = canvas.getContext('2d');
-    var BB=canvas.getBoundingClientRect();
-    var offsetX=BB.left;
-    var offsetY=BB.top;
     let isDragging = false;
+    const getClientRect = canvas.getBoundingClientRect()
+    const offsetLeft = getClientRect.left;
+    const offsetTop = getClientRect.top;
+    console.log(getClientRect);
     const canvasWidth = canvas.width;
     const canvasHeight = canvas.height;
     canvas.onselectstart = () => false;
     let localMediaStream = null;
+    const stickerWidth = 150;
+    const stickerHeight = 150;
     const video = document.getElementById('video');
-    let defaultPosX = 240 - 75;
-    let defaultPosY = 240 - 75;
+    let defaultPosX = 0;
+    let defaultPosY = 0;
+    let startX;
+    let startY;
     const snapBtn = document.getElementById('snap');
     const modal = document.getElementById('exampleModal')
     const closeBtnX = document.querySelector('.close');
@@ -63,17 +68,19 @@
 function handleMouseDown(e){
     e.preventDefault();
     e.stopPropagation();
-	var mouseX = parseInt(e.clientX - offsetX);
-	var mouseY = parseInt(e.clientY - offsetY);
+	var mouseX = parseInt(e.clientX - offsetLeft);
+	var mouseY = parseInt(e.clientY - offsetTop);
     // set the drag flag
     isDragging = false;
-    if (mouseX > defaultPosX - 150 && mouseX < defaultPosX + 150 
-        && mouseY > defaultPosY - 150 && mouseY < defaultPosY + 150) {
+    if (mouseX > defaultPosX &&
+        mouseX < (startX + stickerWidth) &&
+        mouseY > defaultPosY &&
+        mouseY < (startY + stickerHeight)) {
         isDragging = true;
     
     }
-    defaultPosX = mouseX;
-    defaultPosY = mouseY;
+    startX = mouseX;
+    startY = mouseY;
 
   }
 
@@ -93,20 +100,23 @@ function handleMouseDown(e){
   function handleMouseMove(e){
     e.preventDefault();
     e.stopPropagation();
-        var mouseX = parseInt(e.clientX - offsetX);
-        var mouseY = parseInt(e.clientY - offsetY);
+    if (isDragging) {
 
-        var dx = mouseX - defaultPosX;
-        var dy = mouseY - defaultPosY;
-        if (isDragging) {
-            defaultPosX += dx;
-            defaultPosY += dy;
-            defaultPosX = mouseX;
-            defaultPosY = mouseY;
-    
-        }
+        var mouseX = parseInt(e.clientX - offsetLeft);
+        var mouseY = parseInt(e.clientY - offsetTop);
+
+        var dx = mouseX - startX;
+        var dy = mouseY - startY;
+        console.log(mouseX, mouseY, e.clientX, e.clientY)
+        defaultPosX += dx;
+        defaultPosY += dy;
+        startX = mouseX;
+        startY = mouseY;
+
+    }
 	// if the drag flag is set, clear the canvas and draw the image
-
+    ctx.lineTo(mouseX, mouseY);
+    ctx.stroke()
   }
 
 canvas.addEventListener('mousedown', handleMouseDown, false);
@@ -135,6 +145,8 @@ canvas.addEventListener('mouseout', handleMouseOut, false);
             .addEventListener('click', e => {
                 currentPic = e.target;
             });
+            faces[i].style.width = stickerWidth;
+            faces[i].style.height = stickerHeight;
         }
     }
 
@@ -151,15 +163,14 @@ canvas.addEventListener('mouseout', handleMouseOut, false);
     function createImage() {
         
         uploadedImg.onload = function() {
-            ctx.clearRect(0,0,canvas.width,canvas.height);
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
 
             ctx.drawImage(uploadedImg, 0, 0, canvasWidth, canvasHeight);
         }
         uploadedImg.src = fr.result;
     }
-
     function draw() {
-        ctx.clearRect(0,0,canvas.width,canvas.height);
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
         if (localMediaStream) {
             ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
         }
@@ -167,13 +178,14 @@ canvas.addEventListener('mouseout', handleMouseOut, false);
             ctx.drawImage(uploadedImg, 0, 0, canvasWidth, canvasHeight);
         }
         if (currentPic){
-		    ctx.drawImage(currentPic, defaultPosX, defaultPosY, 150, 150);
+		    ctx.drawImage(currentPic, defaultPosX, defaultPosY, stickerWidth, stickerHeight);
         }
+
     }
 
     setInterval(function() {
         draw();
-      }, 10);
+      }, 100);
 
 
 /*END FILE UPLOAD*/

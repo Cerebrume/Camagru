@@ -2,7 +2,7 @@
 <div class="container-fluid">
 	<div class="row justify-content-center">
 		<?php foreach($viewmodel['posts'] as $item) : ?>
-			<div class="share col-4" post-id=<?php echo $item['id']; ?>>
+			<div class="share col-xl-4 col-md-8 col-sm-8 col-xs-12" post-id=<?php echo $item['id']; ?>>
 				<h3 class="share_user"><?php echo $item['post_user']; ?></h3>
 				<?php if ($_SESSION['user_data']['login'] == $item['post_user']) : ?>
 					<div>

@@ -1,12 +1,12 @@
 
 <div class="container-fluid no-select">
 	<div class="row justify-content-center">
-		<div class="col-5">
-			<div class="camera-canvas">
-				<video id="video" width="480" height="480" autoplay></video>
-				<canvas id="canvas" width="480" height="480"></canvas>
+		<div class="col-xl-5 col-lg-6 col-md-12">
+			<div class="camera-canvas d-flex flex-column align-items-center justify-content-center">
+				<video id="video" width="480px" height="480px" autoplay></video>
+				<canvas id="canvas" width="480px" height="480px"></canvas>
 				<div class="camera-images container-fluid">
-					<div class="row">
+					<div class="row justify-content-center">
 						<div class="col-2">
 							<img class="face-preset" src="<?php echo ROOT_URL; ?>assets/img/preset2-img.png" alt="" srcset="">
 						</div>
@@ -23,12 +23,19 @@
 				</div>
 			</div>
 		</div>
-		<div class="post-add col-5">
-			<h3 class="file-h3">CHOSE PHOTO FROM FOLDER:</h3>
-				<input class="post-add__file" type="file" name="file" id="file" accept=".png, .jpg, .jpeg">
-				<h3 class="comment-h3">YOUR COMMENT:</h3>
-				<textarea class="post-add__comment" style="resize:none;" name="desc" id="desc" cols="20" rows="3" maxlength="70"></textarea>
-				<button class="post-add__snap" id="snap">Snap Photo</button>
+		<div class="post-add d-flex flex-column align-items-start col-xl-3 col-lg-3 col-md-10 col-sm-10 col-10">
+			<h3 class="file-h3">Chose photo from folder:</h3>
+			<div class="input-group mb-3">
+				<div class="custom-file">
+					<input type="file" class="post-add__file custom-file-input" id="file" name="file" accept=".png, .jpg, .jpeg">
+					<label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+				</div>
+			</div>
+				<h3 class="comment-h3">Add comment:</h3>
+				<div class="input-group">
+					<textarea class="form-control" aria-label="With textarea"></textarea>
+				</div>
+				<button class="post-add__snap btn btn-primary mt-3" id="snap">Snap Photo</button>
 		</div>
 	</div>
 </div>
