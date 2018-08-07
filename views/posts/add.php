@@ -31,9 +31,13 @@
 					<label class="custom-file-label" for="inputGroupFile01">Choose file</label>
 				</div>
 			</div>
+			<div class="input-group">
+			<button type="button" class="btn btn-outline-secondary removeImg">Remove img</button>
+				</div>
+
 				<h3 class="comment-h3">Add comment:</h3>
 				<div class="input-group">
-					<textarea class="form-control" aria-label="With textarea"></textarea>
+					<textarea class="form-control post-add__comment" aria-label="With textarea" maxlength="50"></textarea>
 				</div>
 				<button class="post-add__snap btn btn-primary mt-3" id="snap">Snap Photo</button>
 		</div>
@@ -49,12 +53,20 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
-        
+      <div class="modal-body d-flex flex-column">
+				<div class="preview-img-container">
+        	<img class="preview-img" alt="preview">
+				</div>
+				<div class="preview-comment">
+					<span>
+						<b><?php echo $_SESSION['user_data']['login']; ?>:</b>
+						<span class="preview-comment-text"></span>
+					</span>
+				</div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary closeBtn">Close</button>
-        <button type="button" class="btn btn-primary">Share picture</button>
+        <button type="button" class="btn btn-primary shareBtn">Share picture</button>
       </div>
     </div>
   </div>

@@ -1,3 +1,9 @@
+(function() {
+    var requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame ||
+                                window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
+    window.requestAnimationFrame = requestAnimationFrame;
+  })();
+
 (function(){
     const canvas = document.getElementById('canvas');
     let ctx = canvas.getContext('2d');
@@ -5,7 +11,6 @@
     const getClientRect = canvas.getBoundingClientRect()
     const offsetLeft = getClientRect.left;
     const offsetTop = getClientRect.top;
-    console.log(getClientRect);
     const canvasWidth = canvas.width;
     const canvasHeight = canvas.height;
     canvas.onselectstart = () => false;
@@ -21,7 +26,14 @@
     const modal = document.getElementById('exampleModal')
     const closeBtnX = document.querySelector('.close');
     const closeBtn = document.querySelector('.closeBtn');
+    const shareBrn = document.querySelector('.shareBtn');
+    const removeImgBtn = document.querySelector('.removeImg');
 
+
+removeImgBtn.addEventListener('click', function() {
+    if (uploadedImg) uploadedImg = null;
+})
+    shareBrn.addEventListener('click', sendShare)
     closeBtnX.addEventListener('click', closeModal)
     closeBtn.addEventListener('click', closeModal)
 
@@ -42,12 +54,10 @@
         modal.style.display = 'none';
         modal.classList.remove('show');
         modal.style.backgroundColor = '';
-
     }
 
 
     function snapshot() {
-        console.log(currentPic, localMediaStream, uploadedImg.src)
         if (!currentPic) return
         if (localMediaStream || uploadedImg.src) {
             modal.style.display = 'block';
@@ -58,7 +68,27 @@
     }
 
     function create_preview() {
-        
+        const previewImg = document.querySelector('.preview-img');
+        const previewComment = document.querySelector('.preview-comment-text');
+        const comment = document.querySelector('.post-add__comment');
+        previewImg.src = canvas.toDataURL('image/jpeg', 1.0);
+        previewComment.innerHTML = comment.value
+    }
+
+    function sendShare() {
+        fetch('', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json, application/xml, text/plain, text/html, *.*',
+                'Content-Type': 'application/json'
+            },
+            mode: 'cors',
+            body: JSON.stringify({
+                submit_img: true,
+                sticker: currentPic.src,
+                userImg: 'asd'
+            })
+        })
     }
     
 /*
@@ -72,10 +102,10 @@ function handleMouseDown(e){
 	var mouseY = parseInt(e.clientY - offsetTop);
     // set the drag flag
     isDragging = false;
-    if (mouseX > defaultPosX &&
-        mouseX < (startX + stickerWidth) &&
-        mouseY > defaultPosY &&
-        mouseY < (startY + stickerHeight)) {
+    if (mouseX > (startX - stickerWidth / 2) &&
+        mouseX < (startX + stickerWidth / 2) &&
+        mouseY > (startY - stickerHeight / 2) &&
+        mouseY < (startY + stickerHeight / 2)) {
         isDragging = true;
     
     }
@@ -102,21 +132,17 @@ function handleMouseDown(e){
     e.stopPropagation();
     if (isDragging) {
 
-        var mouseX = parseInt(e.clientX - offsetLeft);
-        var mouseY = parseInt(e.clientY - offsetTop);
+        var mouseX = parseInt(e.clientX -offsetLeft);
+        var mouseY = parseInt(e.clientY -offsetTop);
 
         var dx = mouseX - startX;
         var dy = mouseY - startY;
-        console.log(mouseX, mouseY, e.clientX, e.clientY)
         defaultPosX += dx;
         defaultPosY += dy;
         startX = mouseX;
         startY = mouseY;
-
     }
-	// if the drag flag is set, clear the canvas and draw the image
-    ctx.lineTo(startX, startY);
-    ctx.stroke()
+    
   }
 
 canvas.addEventListener('mousedown', handleMouseDown, false);
@@ -137,7 +163,7 @@ canvas.addEventListener('mouseout', handleMouseOut, false);
     const fr = new FileReader();
     const faces = document.getElementsByClassName('face-preset');
     let currentPic = null;
-    const uploadedImg = new Image();
+    let uploadedImg = new Image();
 
     function addEventListenerForFaces() {
         for (let i = 0; i < faces.length; i++) {
@@ -164,7 +190,6 @@ canvas.addEventListener('mouseout', handleMouseOut, false);
         
         uploadedImg.onload = function() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-
             ctx.drawImage(uploadedImg, 0, 0, canvasWidth, canvasHeight);
         }
         uploadedImg.src = fr.result;
@@ -173,19 +198,21 @@ canvas.addEventListener('mouseout', handleMouseOut, false);
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         if (localMediaStream) {
             ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-        }
+        } 
         if(uploadedImg) {
             ctx.drawImage(uploadedImg, 0, 0, canvasWidth, canvasHeight);
         }
         if (currentPic){
-		    ctx.drawImage(currentPic, defaultPosX, defaultPosY, stickerWidth, stickerHeight);
+            ctx.fillStyle = 'rgba(0,0,0,0.1)';
+            ctx.fillRect(defaultPosX,defaultPosY,stickerWidth,stickerHeight);
+            ctx.drawImage(currentPic, defaultPosX, defaultPosY, stickerWidth, stickerHeight);
+
         }
-        ctx.fillRect(defaultPosX,defaultPosY,stickerWidth,stickerHeight);
     }
 
     setInterval(function() {
-        draw();
-      }, 100);
+        requestAnimationFrame(draw);
+    }, 10);
 
 
 /*END FILE UPLOAD*/
