@@ -16,7 +16,7 @@
     canvas.onselectstart = () => false;
     let localMediaStream = null;
     const stickerWidth = 150;
-    const stickerHeight = 150;
+    const stickerHeight = 250;
     const video = document.getElementById('video');
     let defaultPosX = 0;
     let defaultPosY = 0;
@@ -100,7 +100,7 @@ removeImgBtn.addEventListener('click', function() {
                 posY: defaultPosY
             })
         })
-        .then(res => res.json())
+        .then(res => res.text())
         .then(imageAdded)
         .catch(e => {
             console.log(e)

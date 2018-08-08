@@ -18,6 +18,9 @@
 						<div class="col-4 col-sm-3">
 							<img class="face-preset" src="<?php echo ROOT_URL; ?>assets/img/preset5-img.png" alt="" srcset="">
 						</div>
+						<div class="col-4 col-sm-3">
+							<img class="face-preset" src="<?php echo ROOT_URL; ?>assets/img/preset1-img.png" alt="" srcset="">
+						</div>
 					</div>
 				</div>
 			</div>
