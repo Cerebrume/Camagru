@@ -36,23 +36,27 @@ class PostModel extends Model{
 					$data = base64_decode($img);
 					$image1 = imagecreatefromstring($data);
 					$image2 = imagecreatefrompng($post['sticker']);
+					imagealphablending($image2,false);
+					imagesavealpha($image2,true);
 					$w_src = imagesx($image2);
 					$h_src =  imagesy($image2);
 					$w_dest = 150;
 					$h_dest = 150;
 					$stickerResized = imagecreatetruecolor($w_dest, $h_dest);
-					imagecolortransparent($stickerResized, imagecolorallocate($stickerResized, 0, 0, 0));
+					// $transparent_color = imagecolorallocatealpha($temp, 0, 0, 0, 127);
+					// imagecolortransparent($stickerResized, $background);
 					imagecopyresampled($stickerResized, $image2, 0, 0, 0, 0, $w_dest, $h_dest, $w_src, $h_src);
-					$merged = imagecopymerge($image1, $stickerResized, (int)$post['posX'], (int)$post['posY'], 0, 0, 150, 150, 100);
-					imagecopymerge($image1, $stickerResized, (int)$post['posX'], (int)$post['posY'], 0, 0, 150, 150, 100);
+					imagecolortransparent($stickerResized, imagecolorallocate($stickerResized,0,0,0));
+					$merged = imagecopymerge($image1, $stickerResized, (int)$post['posX'], (int)$post['posY'], 0, 0, 150, 150, 90);
+					imagecopymerge($image1, $stickerResized, (int)$post['posX'], (int)$post['posY'], 0, 0, 150, 150, 90);
 					ob_start(); // Let's start output buffering.
-					imagepng($image1, null, 0);
+					imagejpeg($image1, null, 100);
 					$contents = ob_get_contents();
 					ob_end_clean();
 					$this->query('INSERT INTO posts (post_user, post_desc, img) VALUES(:user, :title, :img)');
 					$this->bind(":title", $post['comment']);
 					$this->bind(":user", $_SESSION['user_data']['login']);
-					$this->bind(":img", 'data:image/png;base64,' . base64_encode($contents), PDO::PARAM_LOB);
+					$this->bind(":img", 'data:image/jpeg;base64,' . base64_encode($contents), PDO::PARAM_LOB);
 					$this->execute();
 					return array('Added' => true);
 				} catch (PDOException $e) {
