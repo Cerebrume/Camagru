@@ -43,16 +43,16 @@ class PostModel extends Model{
 					$w_dest = 150;
 					$h_dest = 150;
 					$stickerResized = imagecreatetruecolor($w_dest, $h_dest);
-					// $transparent_color = imagecolorallocatealpha($temp, 0, 0, 0, 127);
-					// imagecolortransparent($stickerResized, $background);
+					imagecolortransparent($stickerResized, imagecolorallocate($stickerResized,0,0,0));					
 					imagecopyresampled($stickerResized, $image2, 0, 0, 0, 0, $w_dest, $h_dest, $w_src, $h_src);
-					imagecolortransparent($stickerResized, imagecolorallocate($stickerResized,0,0,0));
-					$merged = imagecopymerge($image1, $stickerResized, (int)$post['posX'], (int)$post['posY'], 0, 0, 150, 150, 90);
-					imagecopymerge($image1, $stickerResized, (int)$post['posX'], (int)$post['posY'], 0, 0, 150, 150, 90);
+					imagedestroy($image2);
+					imagecopymerge($image1, $stickerResized, (int)$post['posX'], (int)$post['posY'], 0, 0, 150, 150, 100);
+					imagedestroy($stickerResized);
 					ob_start(); // Let's start output buffering.
 					imagejpeg($image1, null, 100);
 					$contents = ob_get_contents();
 					ob_end_clean();
+					imagedestroy($image1);
 					$this->query('INSERT INTO posts (post_user, post_desc, img) VALUES(:user, :title, :img)');
 					$this->bind(":title", $post['comment']);
 					$this->bind(":user", $_SESSION['user_data']['login']);
