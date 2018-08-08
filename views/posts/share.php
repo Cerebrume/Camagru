@@ -1,4 +1,4 @@
 <?php
-   //header("Content-Type: application/json");
-   print_r($viewmodel);
+   header("Content-Type: application/json");
+   echo json_encode($viewmodel);
 ?>

@@ -44,18 +44,15 @@ class PostModel extends Model{
 					imagecolortransparent($stickerResized, imagecolorallocate($stickerResized, 0, 0, 0));
 					imagecopyresampled($stickerResized, $image2, 0, 0, 0, 0, $w_dest, $h_dest, $w_src, $h_src);
 					$merged = imagecopymerge($image1, $stickerResized, (int)$post['posX'], (int)$post['posY'], 0, 0, 150, 150, 100);
-					$final = imagecreatetruecolor(480, 480);
-					imagecolortransparent($final, imagecolorallocate($final, 155, 155, 0));
-					$merged = imagecopymerge($final, $image1, 0, 0, 0, 0, 480, 480, 100);
-					imagecopymerge($final, $stickerResized, (int)$post['posX'], (int)$post['posY'], 0, 0, 150, 150, 100);
+					imagecopymerge($image1, $stickerResized, (int)$post['posX'], (int)$post['posY'], 0, 0, 150, 150, 100);
 					ob_start(); // Let's start output buffering.
-					imagejpeg($final, null, 100);
+					imagepng($image1, null, 0);
 					$contents = ob_get_contents();
 					ob_end_clean();
 					$this->query('INSERT INTO posts (post_user, post_desc, img) VALUES(:user, :title, :img)');
 					$this->bind(":title", $post['comment']);
 					$this->bind(":user", $_SESSION['user_data']['login']);
-					$this->bind(":img", 'data:image/jpeg;base64,' . base64_encode($contents), PDO::PARAM_LOB);
+					$this->bind(":img", 'data:image/png;base64,' . base64_encode($contents), PDO::PARAM_LOB);
 					$this->execute();
 					return array('Added' => true);
 				} catch (PDOException $e) {

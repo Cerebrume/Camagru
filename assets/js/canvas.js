@@ -100,11 +100,16 @@ removeImgBtn.addEventListener('click', function() {
                 posY: defaultPosY
             })
         })
-        .then(res => res.text())
-        .then(res => console.log(res))
-        .catch(e => console.log(e))
+        .then(res => res.json())
+        .then(imageAdded)
+        .catch(e => {
+            console.log(e)
+        })
     }
     
+    function imageAdded() {
+        
+    }
 /*
 ** Canvas mouse handlers
 */
