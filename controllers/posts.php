@@ -10,6 +10,11 @@
 			$this->returnView($vievmodel->add(), true);
 		}
 
+		protected function share() {
+			$vievmodel = new PostModel();
+			$this->returnView($vievmodel->share(), false);
+		}
+
 		protected function comment() {
 			$vievmodel = new PostModel();
 			$this->returnView($vievmodel->comment(), false);

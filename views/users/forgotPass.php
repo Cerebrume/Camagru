@@ -1,7 +1,7 @@
 <div class="container-fluid">
 	<div class="row justify-content-center align-items-center">
-		<div class="img col-3"><img class="side-img" src="<?php echo ROOT_URL. "assets/img/login-img.jpg" ?>" alt=""></div>
-		<div class="main_text offset-1 col-3">
+		<div class="img cl-xl-4 col-md-4 col-sm-7 col-8"><img class="side-img" src="<?php echo ROOT_URL. "assets/img/login-img.jpg" ?>" alt=""></div>
+		<div class="main_text cl-xl-4 col-md-4 col-sm-7 col-8">
 			<h2>Fill the fields to reset your password</h2>
 			<form id="form-forgot" name="resetPass" method="post">
                 <div class="input-group input-group-lg">

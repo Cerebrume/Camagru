@@ -28,7 +28,8 @@
     const closeBtn = document.querySelector('.closeBtn');
     const shareBrn = document.querySelector('.shareBtn');
     const removeImgBtn = document.querySelector('.removeImg');
-
+    let previewWithoutSticker = null;
+    const previewComment = document.querySelector('.preview-comment-text');
 
 removeImgBtn.addEventListener('click', function() {
     if (uploadedImg) uploadedImg.src = '';
@@ -69,14 +70,21 @@ removeImgBtn.addEventListener('click', function() {
 
     function create_preview() {
         const previewImg = document.querySelector('.preview-img');
-        const previewComment = document.querySelector('.preview-comment-text');
         const comment = document.querySelector('.post-add__comment');
         previewImg.src = canvas.toDataURL('image/jpeg', 1.0);
         previewComment.innerHTML = comment.value
     }
 
     function sendShare() {
-        fetch('', {
+        const baseUrl = document.URL;
+		function makeUrl(url, endpoint) {
+			let newUrl = url.split('/');
+		
+			return `http://${newUrl[2]}/${newUrl[3]}/${newUrl[4]}/${endpoint}`
+		}
+        const url = (makeUrl(baseUrl, 'share'));
+        const comment = document.querySelector('.preview-comment-text');
+        fetch(url, {
             method: 'POST',
             headers: {
                 'Accept': 'application/json, application/xml, text/plain, text/html, *.*',
@@ -85,10 +93,16 @@ removeImgBtn.addEventListener('click', function() {
             mode: 'cors',
             body: JSON.stringify({
                 submit_img: true,
+                comment: comment.innerHTML,
                 sticker: currentPic.src,
-                userImg: 'asd'
+                userImg: previewWithoutSticker,
+                posX: defaultPosX,
+                posY: defaultPosY
             })
         })
+        .then(res => res.text())
+        .then(res => console.log(res))
+        .catch(e => console.log(e))
     }
     
 /*
@@ -202,6 +216,7 @@ canvas.addEventListener('mouseout', handleMouseOut, false);
         if(uploadedImg && uploadedImg.src) {
             ctx.drawImage(uploadedImg, 0, 0, canvasWidth, canvasHeight);
         }
+        previewWithoutSticker = canvas.toDataURL('image/jpeg', 1.0);
         if (currentPic){
             ctx.fillStyle = 'rgba(0,0,0,0.1)';
             ctx.fillRect(defaultPosX,defaultPosY,stickerWidth,stickerHeight);

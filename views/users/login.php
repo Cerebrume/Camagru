@@ -1,7 +1,7 @@
 <div class="container-fluid">
 	<div class="row justify-content-center align-items-center">
-		<div class="img col-3"><img class="side-img" src="<?php echo ROOT_URL. "assets/img/login-img.jpg" ?>" alt=""></div>
-		<div class="main_text offset-1 col-3">
+		<div class="img cl-xl-4 col-md-4 col-sm-7 col-8"><img class="side-img" src="<?php echo ROOT_URL. "assets/img/login-img.jpg" ?>" alt=""></div>
+		<div class="main_text cl-xl-4 col-md-4 col-sm-7 col-8">
 			<h2>Fill the fields to enter the site</h2>
 			<?php Messages::displayMessage(); ?>
 			<form id="form-login" name="register" action="<?php //echo $_SERVER['PHP_SELF']; ?>" method="post">

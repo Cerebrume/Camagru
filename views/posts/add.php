@@ -1,22 +1,21 @@
-
 <div class="container-fluid no-select">
 	<div class="row justify-content-center">
 		<div class="col-xl-5 col-lg-6 col-md-12">
 			<div class="camera-canvas d-flex flex-column align-items-center justify-content-center">
 				<video id="video" width="480px" height="480px" autoplay></video>
 				<canvas id="canvas" width="480px" height="480px"></canvas>
-				<div class="camera-images container-fluid">
+				<div class="camera-images container">
 					<div class="row justify-content-center">
-						<div class="col-2">
+						<div class="col-4 col-sm-3">
 							<img class="face-preset" src="<?php echo ROOT_URL; ?>assets/img/preset2-img.png" alt="" srcset="">
 						</div>
-						<div class="col-2">
+						<div class="col-4 col-sm-3">
 							<img class="face-preset" src="<?php echo ROOT_URL; ?>assets/img/preset3-img.png" alt="" srcset="">
 						</div>
-						<div class="col-2">
+						<div class="col-4 col-sm-3">
 							<img class="face-preset" src="<?php echo ROOT_URL; ?>assets/img/preset4-img.png" alt="" srcset="">
 						</div>
-						<div class="col-2">
+						<div class="col-4 col-sm-3">
 							<img class="face-preset" src="<?php echo ROOT_URL; ?>assets/img/preset5-img.png" alt="" srcset="">
 						</div>
 					</div>
@@ -44,7 +43,7 @@
 	</div>
 </div>
 
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade container-fluid" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -55,7 +54,7 @@
       </div>
       <div class="modal-body d-flex flex-column">
 				<div class="preview-img-container">
-        	<img class="preview-img" alt="preview">
+        	<img class="preview-img" alt="preview" width="100%">
 				</div>
 				<div class="preview-comment">
 					<span>
