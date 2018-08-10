@@ -27,9 +27,10 @@
 		</div>
 		<div class="post-add d-flex flex-column align-items-start col-xl-3 col-lg-3 col-md-10 col-sm-10 col-10">
 
-		<div calss="mb-3 recent-photos">
+		<div class="mb-3 recent-photos">
 			<h5>Recently taken photos:</h5>
-			<div calss=""></div>
+			<div class="recent-photos__container">
+			</div>
 		</div>
 			<hr>
 			<h3 class="file-h3">Chose photo from folder:</h3>

@@ -20,7 +20,24 @@ html {
   margin-right: 0;
 }
 
+.recent-photos {
+  width: 100%;
+}
 
+.recent-photos__container {
+  border: 1px solid #ccc;
+  min-height: 50px;
+  max-height: 400px;
+  overflow-y: scroll;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.recent-photos__container img{
+  width: 100px;
+  height: 100px;
+  margin: 10px;
+}
 
 
 p.nomargin {
@@ -305,9 +322,6 @@ p.arror_text {
   min-height: 480px;
 }
 
-.recent-photos {
-  border-bottom: #00f6ff;
-}
 
 @media only screen and (max-width: 600px) {
   #canvas {
