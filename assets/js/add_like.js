@@ -32,14 +32,13 @@ function like(e) {
 		})
 	})
 	.then(res => res.text())
-	.then(res => console.log(res))
+	.then(res => addLikeToDom)
     .catch(e => console.log(e))
-    addLikeToDom();
-    this.setAttribute('disabled', true);
-    this.classList.add('liked');
-    function addLikeToDom() {
+    function addLikeToDom(res) {
+        if (!res.Added) return;
         const likes_count = document.getElementsByClassName('likes_count');
-
+        this.setAttribute('disabled', true);
+        this.classList.add('liked');    
         let currentLikes = null;
         for(let i = 0; i < likes_count.length; i++) {
             if (likes_count[i].getAttribute('post-id') === post_id) {

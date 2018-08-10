@@ -147,7 +147,7 @@ class PostModel extends Model{
 	}
 
 	public function like() {
-		if ($_SESSION['is_logged_in']) {
+		if (isset($_SESSION['is_logged_in'])) {
 			$post = json_decode(file_get_contents('php://input'), true);
 			if (!$post['submit_like']) return array('Added' => false);
 			try {
