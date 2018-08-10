@@ -31,15 +31,15 @@ function like(e) {
 			post_id: post_id
 		})
 	})
-	.then(res => res.text())
+	.then(res => res.json())
 	.then(addLikeToDom)
     .catch(e => console.log(e))
+    this.setAttribute('disabled', true);
+    this.classList.add('liked');    
+
     function addLikeToDom(res) {
-        console.log(res)
-        if (!res.Added) return;
+        if (res.Added !== true) return;
         const likes_count = document.getElementsByClassName('likes_count');
-        this.setAttribute('disabled', true);
-        this.classList.add('liked');    
         let currentLikes = null;
         for(let i = 0; i < likes_count.length; i++) {
             if (likes_count[i].getAttribute('post-id') === post_id) {
@@ -47,7 +47,6 @@ function like(e) {
                 break;
             }
         }
-        console.log('added')
         return currentLikes.innerHTML = parseInt(currentLikes.innerHTML) + 1
     }
 }
