@@ -7,6 +7,8 @@
 			<h1>project. Hope you'll enjoy!</h1>
 			<a href="<?php echo ROOT_URL; ?>users/register" class="btn btn-primary btn-lg">Register</a>
 			<a href="<?php echo ROOT_URL; ?>users/login" class="btn btn-outline-secondary btn-lg">Login</a>
+			<a href="<?php echo ROOT_URL; ?>posts" class="btn btn-outline-secondary btn-lg">Watch shares</a>
+
 		</div>
 	</div>
 </div>

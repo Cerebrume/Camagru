@@ -305,6 +305,10 @@ p.arror_text {
   min-height: 480px;
 }
 
+.recent-photos {
+  border-bottom: #00f6ff;
+}
+
 @media only screen and (max-width: 600px) {
   #canvas {
     max-height: 350px;

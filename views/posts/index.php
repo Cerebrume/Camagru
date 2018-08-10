@@ -4,7 +4,7 @@
 		<?php foreach($viewmodel['posts'] as $item) : ?>
 			<div class="share col-xl-4 col-md-8 col-sm-8 col-xs-12" post-id=<?php echo $item['id']; ?>>
 				<h3 class="share_user"><?php echo $item['post_user']; ?></h3>
-				<?php if ($_SESSION['user_data']['login'] == $item['post_user']) : ?>
+				<?php if (!empty($_SESSION['user_data']) && $_SESSION['user_data']['login'] == $item['post_user']) : ?>
 					<div>
 						<button
 							post-id=<?php echo $item['id']; ?>
@@ -27,11 +27,13 @@
 				</p>
 				<div class="comments">
 				</div>
-				<div class="comment">
-					<textarea name="comment" style="resize:none;" maxlength="200" id=<?php $id = $item['id']."-post__comment"; echo $id;?>></textarea>
+				<?php if(isset($_SESSION['is_logged_in']) && $_SESSION['is_logged_in']) : ?>
+					<div class="comment">
+						<textarea name="comment" style="resize:none;" maxlength="200" id=<?php $id = $item['id']."-post__comment"; echo $id;?>></textarea>
 
-					<input class="btn btn-primary brn-sm btn-submit-comment" type="button" value="Comment" post-id=<?php echo $item['id']; ?>>
-				</div>
+						<input class="btn btn-primary brn-sm btn-submit-comment" type="button" value="Comment" post-id=<?php echo $item['id']; ?>>
+					</div>
+				<?php endif ?>
 				<small class="share_date"><?php echo $item['post_date']; ?></small>
 			</div>
 		<?php endforeach; ?>
