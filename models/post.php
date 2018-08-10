@@ -19,6 +19,9 @@ class PostModel extends Model{
 	}
 
 	public function add() {
+		if (!$_SESSION['is_logged_in']) {
+			header('Location: '.ROOT_URL);
+		}
 		return ;
 	}
 

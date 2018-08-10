@@ -32,9 +32,10 @@ function like(e) {
 		})
 	})
 	.then(res => res.text())
-	.then(res => addLikeToDom)
+	.then(addLikeToDom)
     .catch(e => console.log(e))
     function addLikeToDom(res) {
+        console.log(res)
         if (!res.Added) return;
         const likes_count = document.getElementsByClassName('likes_count');
         this.setAttribute('disabled', true);
@@ -46,6 +47,7 @@ function like(e) {
                 break;
             }
         }
+        console.log('added')
         return currentLikes.innerHTML = parseInt(currentLikes.innerHTML) + 1
     }
 }
