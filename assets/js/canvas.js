@@ -13,7 +13,6 @@
     const offsetTop = getClientRect.top;
     const canvasWidth = canvas.width;
     const canvasHeight = canvas.height;
-    //canvas.onselectstart = () => false;
     let localMediaStream = null;
     const stickerWidth = 150;
     const stickerHeight = 250;
