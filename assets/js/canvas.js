@@ -108,7 +108,17 @@ removeImgBtn.addEventListener('click', function() {
     }
     
     function imageAdded() {
-        
+        const previews = document.querySelector('.recent-photos__container');
+        let preview = canvas.toDataURL('image/jpeg', 1.0);
+        closeModal();
+        let previewImage = document.createElement('img');
+        previewImage.setAttribute('src', preview);
+        previews.appendChild(previewImage);
+        currentPic = null;
+        const comment = document.querySelector('.post-add__comment');
+        comment.value = '';
+        defaultPosX = 0;
+        defaultPosY = 0;    
     }
 /*
 ** Canvas mouse handlers
@@ -223,10 +233,7 @@ canvas.addEventListener('mouseout', handleMouseOut, false);
         }
         previewWithoutSticker = canvas.toDataURL('image/jpeg', 1.0);
         if (currentPic){
-            ctx.fillStyle = 'rgba(0,0,0,0.1)';
-            ctx.fillRect(defaultPosX,defaultPosY,stickerWidth,stickerHeight);
             ctx.drawImage(currentPic, defaultPosX, defaultPosY, stickerWidth, stickerHeight);
-
         }
     }
 
